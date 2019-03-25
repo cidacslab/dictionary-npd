@@ -33,9 +33,26 @@
         } 
     -->
         <header>
-
+            <!-- Dropdown Structure -->
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="#!">Usuário</a></li>
+                <li><a href="#!">Ver Dicionários</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">Sair</a></li>
+            </ul>
+            <nav class="grey lighten-2">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo"></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="/static/img/icons8-usuário-de-gênero-neutro-48.png" class="user-icon">
+                            <img src="/static/img/icons8-ordem-descendente-48.png" class="dropdown-icon"></a></li>
+                    </ul>
+                </div>
+            </nav>
         </header>
         <div class="container">
+            <h1>Dicionário</h1></br>
             <form  action="/teste"  id="myForm" method="post" >
                 <div class="row">
                     <div class="col s3">

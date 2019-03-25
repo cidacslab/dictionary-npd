@@ -1,3 +1,4 @@
+//Add new category in box
 $("#add-category").click(function(){
     $("#category").append(" <div class='col s5'> <input type='text' id='nameCategory' name='nameCategory' placeholder='Nome da Categoria'>" +    
     '</div>'+
@@ -13,3 +14,10 @@ $("#add-category").click(function(){
     '<div class="col s2">'+
     "</div>");
   });
+
+  //Dropdown in menu
+
+  $(document).ready(function(){
+    $(".dropdown-trigger").dropdown({hover:false});
+  });
+ 
