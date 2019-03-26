@@ -7,11 +7,8 @@
         <title>Document</title>
         <link type="text/css" rel="stylesheet" href="static/lib/css/materialize.min.css"  media="screen,projection"/>  <!--Import materialize.css-->
         <link type='text/css' rel="stylesheet" href="static/css/style.css"> <!-- My CSS -->
-        <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous">
-        </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"> </script>
+        <script type="text/javascript" src="static/js/script.js"></script>
     </head>
     <body>
         <!-- {
@@ -92,7 +89,7 @@
                                         <input type="text" id="patternValue" name="patternValue" placeholder="Valor Padronizado">
                                     </div>
                                     <div class="col s2">
-                                        <a class="btn-floating btn-large waves-effect waves-light red" id="add-category"><img src="static/img/icons8-soma-40.png" class="btn-add"></a>
+                                        <a class="btn-floating btn-large waves-effect waves-light red" id="add-category" onclick="AddCampos()"><img src="static/img/icons8-soma-40.png" class="btn-add"></a>
                                     </div>
                                     <script>
                                         for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
@@ -108,10 +105,12 @@
                                                 "<input type='text' id='patternValue"+iLoop+"' name='patternValue"+iLoop+"' placeholder='Valor Padronizado'>"+
                                             "</div>"+
                                             "<div class='col s2'>"+
-                                                "<input type='button' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'></span>"+
-                                            "</div>");
+                                                "<input type='button' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'>"+
+                                            "</div> </span>");
                                     }
                                     </script>
+                                    <input type="hidden" name="hidden1" id="hidden1">
+                                    <input type="hidden" name="hidden2" id="hidden2">
                                 </div>
                             </div>
                         </div>
@@ -127,7 +126,6 @@
         </div>
         <!--JavaScript at end of body for optimized loading-->
         <script type="text/javascript" src="static/lib/js/materialize.min.js"></script>
-        <script type="text/javascript" src="static/js/script.js"></script>
         <script>
             var values = new Array();
             $("button").click(function(e){ 

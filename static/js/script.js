@@ -25,7 +25,7 @@ $("#add-category").click(function(){
 //Add and remove new category in box 'text two'
 
 //Total máximo de campos que você permitirá criar em seu site:
-var totalCampos = 10;
+var totalCampos = 100;
 
 //Variaveis de controle
 var iLoop = 1;
@@ -73,7 +73,7 @@ function RemoverCampos(id) {
     //Criando ponteiro para hidden1:        
     var hidden1 = document.getElementById("hidden1");
     //Pegar o valor do campo que será excluído:
-    var campoValor = document.getElementById("arq"+id).value;
+    var campoValor = document.getElementById("nameCategory"+id).value;
     //Se o campo não tiver nenhum valor, atribuir a string: vazio:
     if (campoValor == "") {
             campoValor = "vazio";
