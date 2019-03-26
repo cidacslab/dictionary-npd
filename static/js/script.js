@@ -1,20 +1,3 @@
-/*Add new category in box
-$("#add-category").click(function(){
-    $("#category").append(" <div class='col s5'> <input type='text' id='nameCategory' name='nameCategory' placeholder='Nome da Categoria'>" +    
-    '</div>'+
-    '<div class="col s2">'+
-        '<input type="text" id="originalValue" name="originalValue" placeholder="Valor Original">'+
-    '</div>'+
-    '<div class="col s1">'+
-        "<img src='static/img/icons8-chevron-right-64.png'>"+
-    '</div>'+
-    '<div class="col s2">'+
-        '<input type="text" id="patternValue" name="patternValue" placeholder="Valor Padronizado">'+
-    '</div>'+
-    '<div class="col s2">'+
-    "</div>");
-  });*/
-
 //Dropdown in menu using Materialize JS
 
   $(document).ready(function(){
@@ -95,13 +78,16 @@ function RemoverCampos(id) {
 
 //Incluindo o box somente para o tipo Byte
 
-jQuery("#type").change(function(){
-    // Aqui você tem o value selecionado assim que o usuário muda o option
-    var tipo = jQuery(this).val();
-    if (tipo == 'Byte'){
-        document.getElementById('#boxCategorys').style.display = 'block';
-    };
- });
+function selected(value){
+    var categorias = document.getElementById('boxCategorys');
+        if(value == "Byte"){
+            categorias.style.display = 'block';
+        }else{
+            categorias.style.display = 'none';
+    }
+}
+
+
 
 
  
