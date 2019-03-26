@@ -15,7 +15,7 @@ $("#add-category").click(function(){
     "</div>");
   });*/
 
-  //Dropdown in menu using Materialize JS
+//Dropdown in menu using Materialize JS
 
   $(document).ready(function(){
     $(".dropdown-trigger").dropdown({hover:false});
@@ -91,6 +91,17 @@ function RemoverCampos(id) {
                     hidden1.value = "";
             }
     }
-}    
+} 
+
+//Incluindo o box somente para o tipo Byte
+
+jQuery("#type").change(function(){
+    // Aqui você tem o value selecionado assim que o usuário muda o option
+    var tipo = jQuery(this).val();
+    if (tipo == 'Byte'){
+        document.getElementById('#boxCategorys').style.display = 'block';
+    };
+ });
+
 
  
