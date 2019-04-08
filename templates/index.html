@@ -14,17 +14,16 @@
 <body>
     <!-- {
         'name_dictionary':'name_dataset,
-        'variable:':[
-            'formaclini':{
-                'description':'bla',
-                'type':'StringType',
-                'categories':{
+        'variable:':'formaclini'
+        'description':'bla',
+        'type':'StringType',
+        'categories':{
                     '1':'I -Indeterminada',
                     '2':'T - Tuberculóide',
                     '3':'D - Dimorfa',
                     '4':'V - Virchowiana',
                     '5':'Não classificado'
-                },
+        },
                 'comment':'bla' 
             },
         ]
@@ -32,10 +31,21 @@
 -->
     <form  action="/teste"  id="myForm" method="post" >
         First name:<br>
+        <input type="text" id="nameDictionary" name="nameDictionary">
         <input type="text" id="nameVariable" name="nameVariable">
         <input type="text" id="description" name="description">
         <input type="text" id="type" name="type">
         <input type="text" id="comment" name="comment">
+        <div>
+            <h3>Categoria</h3>
+            <input type="text" class="cat_value" name="cat_value">
+            ->
+            <input type="text" class="cat_descr" name="cat_descr">
+            <br>
+            <input type="text" class="cat_value" name="cat_value">
+            ->
+            <input type="text" class="cat_descr" name="cat_descr">
+        </div>
         <input type="text"  name="result" hidden id="result">
         <button type="button"  id="add">Add</button>
         <button type="button"  id="compile">Compile</button>
@@ -44,20 +54,46 @@
     </form>
 <script>
     var values = new Array();
+    var catDes = new Array();
+    var catVal = new Array();
+
+    var categories = function(x,y) {
+        var result = '';
+        $(x).each(function() {
+            catVal.push($(this).val());
+        });
+        $(y).each(function() {
+            catDes.push($(this).val());
+        });
+        for (var index = 0; index < catDes.length; index++) {
+            result = result.concat(String("'"+catVal[index]+"' : '"+catDes[index]+"',")); 
+        }
+        catDes.length = 0 //clear
+        catVal.length = 0 //clear
+        
+        return result;
+    }
     $("button").click(function(e){ 
         var idClicked = e.target.id;
         if(idClicked == 'add'){
             
-                var value = '"'+String($('#nameVariable').val() + '":{ ') +
+                var value = 
+                "{"+
+                    '"variable": "'+String($('#nameVariable').val()+'" ,')+
                     '"description": "'+String($('#description').val()+'" ,') +
-                    '"type":"'+String($('#type').val() +'" ,') +
-                    '"comment":"'+String($('#comment').val() +'" ,') +
-                    '"description":"'+String($('#description').val() + '"}-') 
-                values.push(value)              
+                    '"type": "'+String($('#type').val() +'" ,') +
+                    '"comment": "'+String($('#comment').val() +'" ,') +
+                    '"description": "'+String($('#description').val() +'" ,') +
+                    '"categories": {'+ categories('.cat_value','.cat_descr')  + "}}-" 
+                values.push(value) 
+               
+                // //console.log(values);
+                // console.log(value);
+                             
         }else if(idClicked == 'compile'){
           $("#result").val(values);
         }
-        //console.log(values);
+        // console.log(values);
     });
 </script>
 </body>
