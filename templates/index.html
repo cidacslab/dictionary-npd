@@ -85,15 +85,10 @@
                     '"comment": "'+String($('#comment').val() +'" ,') +
                     '"description": "'+String($('#description').val() +'" ,') +
                     '"categories": {'+ categories('.cat_value','.cat_descr')  + "}}-" 
-                values.push(value) 
-               
-                // //console.log(values);
-                // console.log(value);
-                             
+                values.push(value)                              
         }else if(idClicked == 'compile'){
           $("#result").val(values);
         }
-        // console.log(values);
     });
 </script>
 </body>
