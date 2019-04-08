@@ -1,95 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous">
-    </script>
-</head>
-<body>
-    <!-- {
-        'name_dictionary':'name_dataset,
-        'variable:':'formaclini'
-        'description':'bla',
-        'type':'StringType',
-        'categories':{
-                    '1':'I -Indeterminada',
-                    '2':'T - Tuberculóide',
-                    '3':'D - Dimorfa',
-                    '4':'V - Virchowiana',
-                    '5':'Não classificado'
-        },
-                'comment':'bla' 
-            },
-        ]
-    } 
--->
-    <form  action="/teste"  id="myForm" method="post" >
-        First name:<br>
-        <input type="text" id="nameDictionary" name="nameDictionary">
-        <input type="text" id="nameVariable" name="nameVariable">
-        <input type="text" id="description" name="description">
-        <input type="text" id="type" name="type">
-        <input type="text" id="comment" name="comment">
-        <div>
-            <h3>Categoria</h3>
-            <input type="text" class="cat_value" name="cat_value">
-            ->
-            <input type="text" class="cat_descr" name="cat_descr">
-            <br>
-            <input type="text" class="cat_value" name="cat_value">
-            ->
-            <input type="text" class="cat_descr" name="cat_descr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Let browser know website is optimized for mobile-->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Dictionary Cidacs</title>
+        <link type="text/css" rel="stylesheet" href="static/lib/css/materialize.min.css"  media="screen,projection"/>  <!--Import materialize.css-->
+        <link type='text/css' rel="stylesheet" href="static/css/style.css"> <!-- My CSS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"> </script>
+        <script type="text/javascript" src="static/js/script.js"></script> <!--My JavaScript-->
+    </head>
+    <body>
+        <!-- {
+            'name_dictionary':'name_dataset,
+            'variable:':[
+                'formaclini':{
+                    'description':'bla',
+                    'type':'StringType',
+                    'categories':{
+                        '1':'I -Indeterminada',
+                        '2':'T - Tuberculóide',
+                        '3':'D - Dimorfa',
+                        '4':'V - Virchowiana',
+                        '5':'Não classificado'
+                    },
+                    'comment':'bla' 
+                },
+            ]
+        } 
+    -->
+        <header> <!--Menu-->
+            <!-- Dropdown Structure -->
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="#!">Usuário</a></li>
+                <li><a href="#!">Ver Dicionários</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">Sair</a></li>
+            </ul>
+            <nav class="grey lighten-2">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo"></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="/static/img/icons8-usuário-de-gênero-neutro-48.png" class="user-icon">
+                            <img src="/static/img/icons8-ordem-descendente-48.png" class="dropdown-icon"></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <h1>Dicionário</h1></br>
+            <form  action="/teste"  id="myForm" method="post" ><!--Formulário-->
+                <div class="row">
+                    <div class="col s3">
+                        <input type="text" id="nameVariable" name="nameVariable" placeholder="Nome da Variável">
+                    </div>
+                    <div class="col s3">
+                        <input type="text" id="description" name="description" placeholder="Descrição">
+                    </div>
+                    <div class="input-field col s3">
+                        <select class="browser-default" id="type" onclick="selected(this.value)">
+                          <option  disabled selected>Tipo</option>
+                          <option >Byte</option>
+                          <option >Date</option>
+                          <option >Integer</option>
+                          <option >Long</option>
+                          <option >String</option>
+                        </select>
+                    </div>
+                    <div class="col s3">
+                        <input type="text" id="comment" name="comment" placeholder="Comentários">   
+                    </div>
+                    <div class="col s12">
+                        <div class="card large my-card" id="boxCategorys" style='display: none'>
+                            <div class="card-content my-card">
+                                <span class="card-title">Categorias</span> <!--Categorias para variaveis tipo Byte-->
+                                <div class="row" id="category">
+                                    <div class="col s5">
+                                        <input type="text" id="nameCategory" name="nameCategory" placeholder="Nome da Categoria">     
+                                    </div>
+                                    <div class="col s2">
+                                        <input type="text" id="originalValue" name="originalValue" placeholder="Valor Original">
+                                    </div>
+                                    <div class="col s1">
+                                        <img src='static/img/icons8-chevron-right-64.png'>
+                                    </div>
+                                    <div class="col s2">
+                                        <input type="text" id="patternValue" name="patternValue" placeholder="Valor Padronizado">
+                                    </div>
+                                    <div class="col s2">
+                                        <a class="btn-floating btn-large waves-effect waves-light red" id="add-category" onclick="AddCampos()"><img src="static/img/icons8-soma-40.png" class="btn-add"></a>
+                                    </div>
+                                    <script> //Loop para mostrar mais campos de categorias.
+                                        for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+                                            document.write("<span id='linha"+iLoop+"' style='display:none'> <div class='col s5'> <input type='text' id='nameCategory"+iLoop+"' name='nameCategory"+iLoop+"' placeholder='Nome da Categoria'>" +    
+                                            "</div>"+
+                                            "<div class='col s2'>"+
+                                                "<input type='text' id='originalValue"+iLoop+"' name='originalValue'"+iLoop+" placeholder='Valor Original'>"+
+                                            "</div>"+
+                                            "<div class='col s1'>"+
+                                                "<img src='static/img/icons8-chevron-right-64.png'>"+
+                                            "</div>"+
+                                            "<div class='col s2'>"+
+                                                "<input type='text' id='patternValue"+iLoop+"' name='patternValue"+iLoop+"' placeholder='Valor Padronizado'>"+
+                                            "</div>"+
+                                            "<div class='col s2'>"+
+                                                "<input type='button' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'>"+
+                                            "</div> </span>");
+                                    }
+                                    </script>
+                                    <input type="hidden" name="hidden1" id="hidden1">
+                                    <input type="hidden" name="hidden2" id="hidden2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <input type="text"  name="result" hidden id="result">
+                <div class="right">
+                    <button type="button"  id="add" class="waves-effect waves-light btn blue">Add</button>
+                    <button type="button"  id="compile" class="waves-effect waves-light btn">Compile</button>
+                    <button type="submit" value="submit" class="waves-effect waves-light btn red">Submit</button>
+                </div>     
+            </form>
         </div>
-        <input type="text"  name="result" hidden id="result">
-        <button type="button"  id="add">Add</button>
-        <button type="button"  id="compile">Compile</button>
-        <button type="submit" value="submit">Submit</button>
-
-    </form>
-<script>
-    var values = new Array();
-    var catDes = new Array();
-    var catVal = new Array();
-
-    var categories = function(x,y) {
-        var result = '';
-        $(x).each(function() {
-            catVal.push($(this).val());
-        });
-        $(y).each(function() {
-            catDes.push($(this).val());
-        });
-        for (var index = 0; index < catDes.length; index++) {
-            result = result.concat(String("'"+catVal[index]+"' : '"+catDes[index]+"',")); 
-        }
-        catDes.length = 0 //clear
-        catVal.length = 0 //clear
-        
-        return result;
-    }
-    $("button").click(function(e){ 
-        var idClicked = e.target.id;
-        if(idClicked == 'add'){
-            
-                var value = 
-                "{"+
-                    '"variable": "'+String($('#nameVariable').val()+'" ,')+
-                    '"description": "'+String($('#description').val()+'" ,') +
-                    '"type": "'+String($('#type').val() +'" ,') +
-                    '"comment": "'+String($('#comment').val() +'" ,') +
-                    '"description": "'+String($('#description').val() +'" ,') +
-                    '"categories": {'+ categories('.cat_value','.cat_descr')  + "}}-" 
-                values.push(value)                              
-        }else if(idClicked == 'compile'){
-          $("#result").val(values);
-        }
-    });
-</script>
-</body>
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src="static/lib/js/materialize.min.js"></script>
+        <script>
+            var values = new Array();
+            $("button").click(function(e){ 
+                var idClicked = e.target.id;
+                if(idClicked == 'add'){
+                    
+                        var value = '"'+String($('#nameVariable').val() + '":{ ') +
+                            '"description": "'+String($('#description').val()+'" ,') +
+                            '"type":"'+String($('#type').val() +'" ,') +
+                            '"comment":"'+String($('#comment').val() +'" ,') +
+                            '"description":"'+String($('#description').val() + '"}-') 
+                        values.push(value)              
+                }else if(idClicked == 'compile'){
+                $("#result").val(values);
+                }
+                //console.log(values);l
+            });
+        </script>
+    </body>
 </html>

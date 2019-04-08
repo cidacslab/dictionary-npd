@@ -1,0 +1,17 @@
+.btn-add {
+    width: 50%;
+    padding-top: 12px;
+}
+
+.my-card {
+    overflow: auto !important;
+}
+
+    .user-icon{
+        width: 40px;
+        margin-top: 10px;
+    }
+
+    .dropdown-icon{
+        width: 30px;
+    }
