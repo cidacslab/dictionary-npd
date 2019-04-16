@@ -1,7 +1,8 @@
 from flask import Flask, request, render_template
 import os
 import json
-from flask_pymongo import PyMongo
+import pandas as pd
+from pymongo import MongoClient
 
 project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, 'templates/')
@@ -32,4 +33,11 @@ def teste():
                                 return "erro"
                         mongo.db[nameDictionary].insert(var)    
         return str(variables),nameDictionary
+        
+def pandas_to_csv():
+        client = MongoClient('localhost', 27017)
+        db = client.dictionaryDB
+        collection = db.hans
 
+        df = pd.DataFrame(list(collection.find()))
+        df[['variable','categories_std','type'].to_csv('/dictionary/name.csv',index=False)
