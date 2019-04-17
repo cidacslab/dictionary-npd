@@ -33,7 +33,7 @@
             <!-- Dropdown Structure -->
             <ul id="dropdown1" class="dropdown-content">
                 <li><a href="#!">Usuário</a></li>
-                <li><a href="#!">Ver Dicionários</a></li>
+                <li><a href="{{ url_for('dictionary') }}">Ver Dicionários</a></li>
                 <li class="divider"></li>
                 <li><a href="#!">Sair</a></li>
             </ul>
@@ -108,7 +108,7 @@
                                                 "<input type='text' class='standardizeValue' id='standardizeValue"+iLoop+"' name='standardizeValue"+iLoop+"' placeholder='Valor Padronizado'>"+
                                             "</div>"+
                                             "<div class='col s2'>"+
-                                                "<a class='btn-floating btn-large waves-effect waves-light white' id='rm-category' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'><img src='static/img/icons8-excluir-50.png' class='btn-add'></a>"+    
+                                                "<a class='btn-floating btn-large waves-effect waves-light white' id='remove-category' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'><img src='static/img/icons8-excluir-50.png' class='btn-add'></a>"+    
                                             "</div> </span>");
                                     }
                                     </script>
