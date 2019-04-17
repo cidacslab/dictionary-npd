@@ -41,3 +41,8 @@ def pandas_to_csv():
 
         df = pd.DataFrame(list(collection.find()))
         df[['variable','categories_std','type'].to_csv('/dictionary/name.csv',index=False)
+           
+
+@app.route('/dictionary')
+def dictionary():
+        return render_template('dictionary.html')
