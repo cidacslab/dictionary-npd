@@ -1,0 +1,60 @@
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Let browser know website is optimized for mobile-->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Dictionary Cidacs</title>
+        <link type="text/css" rel="stylesheet" href="static/lib/css/materialize.min.css"  media="screen,projection"/>  <!--Import materialize.css-->
+        <link type='text/css' rel="stylesheet" href="static/css/style.css"> <!-- My CSS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"> </script>
+        <script type="text/javascript" src="static/js/script.js"></script> <!--My JavaScript-->
+    </head>
+    <header> <!--Menu-->
+        <!-- Dropdown Structure -->
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!">Usuário</a></li>
+            <li><a href="{{ url_for('dictionary') }}">Ver Dicionários</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">Sair</a></li>
+        </ul>
+        <nav class="grey lighten-2">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo"></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="/static/img/icons8-usuário-de-gênero-neutro-48.png" class="user-icon">
+                        <img src="/static/img/icons8-ordem-descendente-48.png" class="dropdown-icon"></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <table class="responsive-table highlight striped">
+            <thead>
+                <tr>
+                    <th scope="col" class=""><h2>Nome do Dicionário</h2></th>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <!--{% for dictionary in dictionarys %}-->
+                    <tr>
+                        <td><!--{{ dictionary.name }}--> Sinasc</td>
+                        <td>
+                            <div class="row">
+                                <form action="{{ url_for('dictionary_delete') }}" method="post" class="pull-right">
+                                    <input type="hidden" name="id" value="{{ dictionary.id }}">
+                                    <input type="submit" class="btn red" data-toggle="confirmation" {# data-title="Tem Certeza??" #} value="Delete">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+    </div>
+    <script type="text/javascript" src="static/lib/js/materialize.min.js"></script>
+</html>
+{% endblock %}
