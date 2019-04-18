@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Let browser know website is optimized for mobile-->
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Dictionary Cidacs</title>
-        <link type="text/css" rel="stylesheet" href="static/lib/css/materialize.min.css"  media="screen,projection"/>  <!--Import materialize.css-->
-        <link type='text/css' rel="stylesheet" href="static/css/style.css"> <!-- My CSS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"> </script>
-        <script type="text/javascript" src="static/js/script.js"></script> <!--My JavaScript-->
-    </head>
+{% extends 'layout/menu.html' %}
+{% block title %}Register{% endblock %}
+{% block body %}
     <body>
         <!-- {
             'name_dictionary':'name_dataset,
@@ -29,25 +20,6 @@
             ]
         } 
     -->
-        <header> <!--Menu-->
-            <!-- Dropdown Structure -->
-            <ul id="dropdown1" class="dropdown-content">
-                <li><a href="#!">Usuário</a></li>
-                <li><a href="{{ url_for('dictionary') }}">Ver Dicionários</a></li>
-                <li class="divider"></li>
-                <li><a href="#!">Sair</a></li>
-            </ul>
-            <nav class="grey lighten-2">
-                <div class="nav-wrapper">
-                    <a href="#" class="brand-logo"></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <!-- Dropdown Trigger -->
-                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="/static/img/icons8-usuário-de-gênero-neutro-48.png" class="user-icon">
-                            <img src="/static/img/icons8-ordem-descendente-48.png" class="dropdown-icon"></a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
         <div class="container">
             <h1>Dicionário</h1></br>
             <form  action="/teste"  id="myForm" method="post" ><!--Formulário-->
@@ -181,5 +153,6 @@
             }
         });
         </script>
+         {% endblock %}
     </body>
 </html>

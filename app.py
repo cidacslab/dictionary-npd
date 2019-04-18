@@ -8,14 +8,22 @@ project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, 'templates/')
 
 app = Flask(__name__, template_folder=template_path)
-app.config['MONGO_DBNAME'] = 'dictionaryDB'
-app.config["MONGO_URI"] = "mongodb://localhost:27017/dictionaryDB"
-
-mongo = PyMongo(app)
+# app.config['MONGO_DBNAME'] = 'dictionaryDB'
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/dictionaryDB"
+client = MongoClient('mongodb://localhost:27017/')
+mongo = client.dictionaryDB
+    
+#     db.cars.insert_many(cars)
+# mongo = PyMongo(app)
 
 @app.route('/')
 def hello_world():
     return render_template('index.html')
+
+@app.route('/dictionary')
+def dictionary():
+        dicttionarys = mongo.collection.find(mongo.name_dictionary).all()
+        return render_template('dictionary.html')
 
 @app.route('/teste', methods=['POST']) 
 def teste():
@@ -31,18 +39,13 @@ def teste():
                                 var = json.loads(var)
                         except:
                                 return "erro"
-                        mongo.db[nameDictionary].insert(var)    
+                        mongo.db[nameDictionary].insert(var)
         return str(variables),nameDictionary
         
-def pandas_to_csv():
-        client = MongoClient('localhost', 27017)
-        db = client.dictionaryDB
-        collection = db.hans
+# def pandas_to_csv():
+#         client = MongoClient('localhost', 27017)
+#         db = client.dictionaryDB
+#         collection = db['']
 
-        df = pd.DataFrame(list(collection.find()))
-        df[['variable','categories_std','type'].to_csv('/dictionary/name.csv',index=False)
-           
-
-@app.route('/dictionary')
-def dictionary():
-        return render_template('dictionary.html')
+#         df = pd.DataFrame(list(collection.find()))
+#         df[['variable','categories_std','type'].to_csv('/dictionary/name.csv', index=False)

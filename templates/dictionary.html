@@ -1,58 +1,49 @@
+{% extends 'layout/menu.html' %}
+{% block title %}View{% endblock %}
 {% block body %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Let browser know website is optimized for mobile-->
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Dictionary Cidacs</title>
-        <link type="text/css" rel="stylesheet" href="static/lib/css/materialize.min.css"  media="screen,projection"/>  <!--Import materialize.css-->
-        <link type='text/css' rel="stylesheet" href="static/css/style.css"> <!-- My CSS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"> </script>
-        <script type="text/javascript" src="static/js/script.js"></script> <!--My JavaScript-->
-    </head>
-    <header> <!--Menu-->
-        <!-- Dropdown Structure -->
-        <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#!">Usuário</a></li>
-            <li><a href="{{ url_for('dictionary') }}">Ver Dicionários</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">Sair</a></li>
-        </ul>
-        <nav class="grey lighten-2">
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo"></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <!-- Dropdown Trigger -->
-                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="/static/img/icons8-usuário-de-gênero-neutro-48.png" class="user-icon">
-                        <img src="/static/img/icons8-ordem-descendente-48.png" class="dropdown-icon"></a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
     <div class="container">
         <table class="responsive-table highlight striped">
             <thead>
                 <tr>
                     <th scope="col" class=""><h2>Nome do Dicionário</h2></th>
+                    <th scope="col">
+                        <form action="" method="get" class="navbar-form navbar-left">
+                            <div class="form-group row">
+                                <input type="text" name="name" class="form-control col s9" placeholder="Name...">
+                                <a  type='submit' class="col s3">
+                                    <?xml version="1.0" encoding="iso-8859-1"?>
+                                    <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966; width: 35px" xml:space="preserve" >
+                                        <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+                                            s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+                                            c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+                                            s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                                        <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                                    </svg>
+                                </a>    
+                            </div>
+                        </form>
+                    </th> 
                     <td></td>
                 </tr>
             </thead>
             <tbody>
-                <!--{% for dictionary in dictionarys %}-->
+                {% for dictionary in dictionarys %}
                     <tr>
-                        <td><!--{{ dictionary.name }}--> Sinasc</td>
+                        <td>{{ name_dictionary }}</td>
                         <td>
                             <div class="row">
                                 <form action="{{ url_for('dictionary_delete') }}" method="post" class="pull-right">
-                                    <input type="hidden" name="id" value="{{ dictionary.id }}">
+                                    <input type="hidden" name="id" value="{{ name_dictionary.id }}">
                                     <input type="submit" class="btn red" data-toggle="confirmation" {# data-title="Tem Certeza??" #} value="Delete">
                                 </form>
+                                <a class="btn pull-right" href="{{ url_for('edit_dictionary', id=name_dictionary.id) }}">Edit</a>
                             </div>
                         </td>
                     </tr>
                     {% endfor %}
-                </tbody>
+            </tbody>
         </table>
     </div>
     <script type="text/javascript" src="static/lib/js/materialize.min.js"></script>
