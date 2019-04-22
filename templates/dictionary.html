@@ -7,7 +7,7 @@
                 <tr>
                     <th scope="col" class=""><h2>Nome do Dicionário</h2></th>
                     <th scope="col">
-                        <form action="" method="get" class="navbar-form navbar-left">
+                        <form action="{{url_for('search')}}" method="get" class="navbar-form navbar-left">
                             <div class="form-group row">
                                 <input type="text" name="name" class="form-control col s9" placeholder="Buscar...">
                                 <button type='submit' class="col s3" style="color: transparent !important; background-color: transparent !important; border-style: double !important;">
@@ -37,6 +37,10 @@
                                 <form action="{{ url_for('dictionary_delete') }}" method="post" class="pull-right">
                                     <input type="hidden" name="id" value="{{ name_dictionary.id }}">
                                     <input type="submit" class="btn red" data-toggle="confirmation" {# data-title="Tem Certeza??" #} value="Delete">
+                                </form>
+                                <form action="{{ url_for('pandas_to_csv') }}" method="get" class="pull-right">
+                                    <input type="hidden" name="id" value="{{ name_dictionary.id }}">
+                                    <input type="submit" class="btn green"  value="Create">
                                 </form>
                                 <a class="btn pull-right" href="{{ url_for('edit_dictionary', id=name_dictionary.id) }}">Edit</a>
                             </div>

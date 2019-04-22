@@ -32,7 +32,7 @@ def index():
 
 @app.route('/dictionary')
 def dictionary():
-        #dicttionarys = mongo.collection.find(name_dictionary).all()
+        #dicttionarys = mongo.collection.find(name_dictionary).all() #Incluir select para buscar todos os dicionarios no banco.
         return render_template('dictionary.html')
 
 @app.route('/teste', methods=['POST']) 
@@ -57,5 +57,9 @@ def teste():
 #         db = client.dictionaryDB
 #         collection = db.hans
 
-        #df = pd.DataFrame(list(collection.find()))
-        #df[['variable','categories_std','type'].to_csv('/dictionary/name.csv',index=False)
+#        df = pd.DataFrame(list(collection.find()))
+#        df[['variable','categories_std','type'].to_csv('/dictionary/name.csv',index=False)
+
+@app.route("/search")
+def search():
+      return render_template('dictionary.html')
