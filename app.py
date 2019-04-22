@@ -62,4 +62,7 @@ def teste():
 
 @app.route("/search")
 def search():
+      #dictionary_search = request.args.get('dictionary')
+      #all_dictionary = query/find all dictionary_search
+      #return render_template('dictionary.html', name_dictionary = all_dictionary)
       return render_template('dictionary.html')
