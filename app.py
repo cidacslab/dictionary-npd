@@ -33,7 +33,7 @@ def index():
 
 @app.route('/dictionary')
 def dictionary():
-        #dicttionarys = mongo.collection.find(name_dictionary).all() #Incluir select para buscar todos os dicionarios no banco.
+        #dicttionarys = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
         return render_template('dictionary.html')
 
 @app.route('/teste', methods=['POST']) 
@@ -60,8 +60,6 @@ def pandas_to_csv():
 
         nameDictionary = str(request.form.get('nameDictionary'))
         
-        client = MongoClient('mongodb://localhost:27017/')
-        db = client.dictionaryDB
         collection = db[nameDictionary]
         df = pd.DataFrame(list(collection.find()))
         df = df[['variable','categories_std','type']]
@@ -69,8 +67,8 @@ def pandas_to_csv():
 
 @app.route("/search")
 def search():
-      #dictionary_search = request.args.get('dictionary')
-      #all_dictionary = query/find all dictionary_search
-      #return render_template('dictionary.html', name_dictionary = all_dictionary)
-      return render_template('dictionary.html')
->>>>>>> Stashed changes
+
+        # nameDictionary = str(request.form.get('nameDictionary'))
+        # collection = db[nameDictionary]
+        # list(db.hans.find())
+        return render_template('dictionary.html')
