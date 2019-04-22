@@ -33,7 +33,7 @@ def index():
 
 @app.route('/dictionary')
 def dictionary():
-        #dicttionarys = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
+        dictionarys = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
         return render_template('dictionary.html')
 
 @app.route('/teste', methods=['POST']) 
@@ -65,10 +65,13 @@ def pandas_to_csv():
         df = df[['variable','categories_std','type']]
         df.to_csv('/dictionary/name.csv',index=False)
 
+@app.route("/edit_dictionary")
+def edit_dictionary():
+       return render_template('variables.html') 
+
 @app.route("/search")
 def search():
-
-        # nameDictionary = str(request.form.get('nameDictionary'))
-        # collection = db[nameDictionary]
-        # list(db.hans.find())
-        return render_template('dictionary.html')
+        nameDictionary = str(request.form.get('dictionary'))
+        collection = mongo.db.name_dictionary.find_one(nameDictionary)
+        #list(db.hans.find())
+        return render_template('dictionary.html', dictionarys = collection)
