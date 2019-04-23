@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import pandas as pd
+import re
 from pymongo import MongoClient
 
 project_root = os.path.dirname(__file__)
@@ -33,8 +34,11 @@ def index():
 
 @app.route('/dictionary')
 def dictionary():
-        dictionarys = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
-        return render_template('dictionary.html')
+        dic = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
+        dictionarys = []
+        for i in dic:
+                dictionarys.append(i)
+        return render_template('dictionary.html', dictionarys=dictionarys)
 
 @app.route('/teste', methods=['POST']) 
 def teste():
@@ -71,7 +75,17 @@ def edit_dictionary():
 
 @app.route("/search")
 def search():
-        nameDictionary = str(request.form.get('dictionary'))
-        collection = mongo.db.name_dictionary.find_one(nameDictionary)
+        nameDictionary = str(request.args.get('dictionary'))
+        analise = re.compile(nameDictionary)
+        collection = db.collection_names(include_system_collections=False)
+        search_dic = []
+        for i in collection:
+                if analise.search(i):
+                        search_dic.append(i)
         #list(db.hans.find())
-        return render_template('dictionary.html', dictionarys = collection)
+        return render_template('dictionary.html', dictionarys = search_dic)
+
+@app.route('/dictionary_delete')
+def dictionary_delete():
+        #função de exclusão de todo o dicionario do banco
+        return render_template('dictionary.html')

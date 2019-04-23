@@ -9,7 +9,7 @@
                     <th scope="col">
                         <form action="{{url_for('search')}}" method="get" class="navbar-form navbar-left">
                             <div class="form-group row">
-                                <input type="text" name="dictionary" class="form-control col s9" placeholder="Buscar...">
+                                <input type="text" name="dictionary" class="form-control col s9" placeholder="Buscar..." id="dictionary" value>
                                 <button type='submit' class="col s3" style="color: transparent !important; background-color: transparent !important; border-style: double !important;">
                                     <?xml version="1.0" encoding="iso-8859-1"?>
                                     <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -31,18 +31,24 @@
             <tbody>
                 {% for dictionary in dictionarys %}
                     <tr>
-                        <td>{{ dictionary.name_dictionary }}</td>
+                        <td>{{ dictionary }}</td>
                         <td>
                             <div class="row">
-                                <form action="{{ url_for('dictionary_delete') }}" method="post" class="pull-right">
-                                    <input type="hidden" name="id" value="{{ dictionary.id }}">
-                                    <input type="submit" class="btn red" data-toggle="confirmation" {# data-title="Tem Certeza??" #} value="Delete">
-                                </form>
-                                <form action="{{ url_for('pandas_to_csv') }}" method="get" class="pull-right">
-                                    <input type="hidden" name="id" value="{{ dictionary.id }}">
-                                    <input type="submit" class="btn green"  value="Create">
-                                </form>
-                                <a class="btn pull-right" href="{{ url_for('edit_dictionary', id=dictionary.id) }}">Edit</a>
+                                <div class="col s4">
+                                    <form action="{{ url_for('dictionary_delete') }}" method="post" class="pull-right">
+                                        <input type="hidden" name="id" value="{{ dictionary.id }}">
+                                        <input type="submit" class="btn red" data-toggle="confirmation" {# data-title="Tem Certeza??" #} value="Delete">
+                                    </form>
+                                </div>
+                                <div class="col s4">
+                                    <form action="{{ url_for('pandas_to_csv') }}" method="get" class="pull-right">
+                                        <input type="hidden" name="id" value="{{ dictionary.id }}">
+                                        <input type="submit" class="btn green"  value="Create">
+                                    </form>
+                                </div>
+                                <div class="col s4">
+                                    <a class="btn pull-right" href="{{ url_for('edit_dictionary', id=dictionary.id) }}">Edit</a>
+                                </div>
                             </div>
                         </td>
                     </tr>
