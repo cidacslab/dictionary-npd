@@ -69,7 +69,7 @@ def pandas_to_csv():
         df = pd.DataFrame(list(collection.find()))
         
         df = df[['variable','categories_std','type']]
-        df.to_csv('/home/juan/dictionary_npd/dictionary/name.csv',index=False)
+        df.to_csv('/../../../dictionary/name.csv',index=False)
         return render_template('index.html')
 
 @app.route("/edit_dictionary")
