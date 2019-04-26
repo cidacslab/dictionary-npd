@@ -1,7 +1,4 @@
 variable,categories_std,type
-formaclini,,StringType
-formaclini_4,,Byte
-idade,,Integer
-idade,,Byte
-dt_nasc,{u'1': u'3'},Byte
-juan,"{u'1': u'3', u'2': u'4'}",Byte
+variable,{},Integer
+j,{'1': '1'},Byte
+j,{'1': '1'},Byte

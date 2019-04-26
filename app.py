@@ -62,12 +62,15 @@ def teste():
 @app.route('/to_csv', methods=['POST'])
 def pandas_to_csv():
 
-        nameDictionary = str(request.form.get('nameDictionary'))
+        nameDictionary = str(request.values.get('id'))
         
         collection = db[nameDictionary]
+
         df = pd.DataFrame(list(collection.find()))
+        
         df = df[['variable','categories_std','type']]
-        df.to_csv('/dictionary/name.csv',index=False)
+        df.to_csv('/home/juan/dictionary_npd/dictionary/name.csv',index=False)
+        return render_template('index.html')
 
 @app.route("/edit_dictionary")
 def edit_dictionary():
@@ -87,5 +90,9 @@ def search():
 
 @app.route('/dictionary_delete')
 def dictionary_delete():
-        #função de exclusão de todo o dicionario do banco
-        return render_template('dictionary.html')
+        nameDictionary = str(request.values.get('id'))
+        collection = db[nameDictionary]
+        collection.remove()
+
+        return redirect('/dictionary')
+        
