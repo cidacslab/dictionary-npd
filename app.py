@@ -88,11 +88,15 @@ def search():
         #list(db.hans.find())
         return render_template('dictionary.html', dictionarys = search_dic)
 
-@app.route('/dictionary_delete')
+@app.route('/dictionary_delete', methods=['GET', 'POST'])
 def dictionary_delete():
         nameDictionary = str(request.values.get('id'))
         collection = db[nameDictionary]
-        collection.remove()
+        collection.drop()
 
-        return redirect('/dictionary')
+        dic = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
+        dictionarys = []
+        for i in dic:
+                dictionarys.append(i)
+        return render_template('dictionary.html', dictionarys=dictionarys)
         
