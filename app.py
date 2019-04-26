@@ -62,14 +62,16 @@ def teste():
 @app.route('/to_csv', methods=['POST'])
 def pandas_to_csv():
 
-        nameDictionary = str(request.values.get('id'))
+        nameDictionary_csv = str(request.values.get('id'))
         
-        collection = db[nameDictionary]
+        collection = db[nameDictionary_csv]
 
         df = pd.DataFrame(list(collection.find()))
         
         df = df[['variable','categories_std','type']]
-        df.to_csv('/../../../dictionary/name.csv',index=False)
+        path_csv = ('/dictionary/'+nameDictionary_csv+'.csv')
+        my_file = os.getcwd()
+        df.to_csv(my_file+path_csv,index=False)
         return render_template('index.html')
 
 @app.route("/edit_dictionary")
@@ -78,8 +80,8 @@ def edit_dictionary():
 
 @app.route("/search")
 def search():
-        nameDictionary = str(request.args.get('dictionary'))
-        analise = re.compile(nameDictionary)
+        nameDictionary_search = str(request.args.get('dictionary'))
+        analise = re.compile(nameDictionary_search)
         collection = db.collection_names(include_system_collections=False)
         search_dic = []
         for i in collection:
@@ -90,8 +92,8 @@ def search():
 
 @app.route('/dictionary_delete', methods=['GET', 'POST'])
 def dictionary_delete():
-        nameDictionary = str(request.values.get('id'))
-        collection = db[nameDictionary]
+        nameDictionary_delete = str(request.values.get('id'))
+        collection = db[nameDictionary_delete]
         collection.drop()
 
         dic = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
