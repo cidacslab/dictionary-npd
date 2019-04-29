@@ -47,7 +47,10 @@
                                     </form>
                                 </div>
                                 <div class="col s4">
-                                    <a class="btn pull-right" href="{{ url_for('edit_dictionary', id=dictionary.id) }}">Edit</a>
+                                    <form action="{{ url_for('edit_dictionary') }}" method="post" class="pull-right">
+                                        <input type="hidden" name="id" value="{{ dictionary }}">
+                                        <input type="submit" class="btn"  value="Edit">
+                                    </form>
                                 </div>
                             </div>
                         </td>
