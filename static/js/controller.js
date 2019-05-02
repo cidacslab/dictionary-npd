@@ -43,6 +43,7 @@ var values = new Array();
             $('.originalValue').val('');
             $('.standardizeValue').val('');
             $('.nameCategory').val('');
+            $('#nameVariable').focus();
             }else if(idClicked == 'compile'){
                 $("#result").val(values);
             }

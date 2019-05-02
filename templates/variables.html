@@ -1,10 +1,17 @@
 {% extends 'layout/menu.html' %}
 {% block title %}View {{dict}}{% endblock %}
 {% block body %}
-    <div class="container wrap" id="table">
+    <div class="container" id="table">
         <table class="responsive-table highlight tborder" id="printJS-dic">
             <thead>
-                <h1>{{dict}}</h1>
+                <div class="row">
+                    <div class="col s8">
+                        <h1>{{dict}}</h1>
+                    </div>
+                    <div class="col s4">
+                        <img class="print" id="logo" src="/static/img/logo-cidacs.svg" >
+                    </div>  
+                </div>
                 <tr>
                     <th>Variable</th>
                     <th>Description</th>
