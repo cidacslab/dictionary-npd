@@ -1,7 +1,7 @@
 {% extends 'layout/menu.html' %}
 {% block title %}View {{dict}}{% endblock %}
 {% block body %}
-    <div class="container">
+    <div class="container wrap" id="table">
         <table class="responsive-table highlight tborder" id="printJS-dic">
             <thead>
                 <h1>{{dict}}</h1>
@@ -26,16 +26,11 @@
             </tbody>
         </table>
         
-        <button type="button" onclick="printJS({printable: 'printJS-dic', 
-                                                type: 'html', 
-                                                header: '{{dict}}' , 
-                                                documentTitle: '{{dict}}', 
-                                                css: '/static/lib/css/materialize.min.css', 
-                                                scanStyles: false})"
-        class="btn-print btn deep-orange darken-4 right" style="margin-top: 20px !important;">
+        <button type="button" onclick="printJS()"
+        class="btn-print btn deep-orange darken-4 right no-print" style="margin-top: 20px !important;">
                 Print Dictionary
         </button>
     </div>
-    <script type="text/javascript" src="static/lib/js/print.min.js"></script>
+    <script type="text/javascript" src="static/js/print.js"></script>
     <script type="text/javascript" src="static/lib/js/materialize.min.js"></script>
 {% endblock %}

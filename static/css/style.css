@@ -22,3 +22,11 @@
     background-color: transparent !important;
     border-style: double !important;
 }
+
+.print {
+    display:none;
+    }
+    
+.no-print { 
+    display:block; 
+}
