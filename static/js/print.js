@@ -59,11 +59,15 @@ function printJS() {
                     'left: auto;'+
                     'right: auto;'+
                 '}'+
-                'body{'+
+                '#table{'+
                     "background-image: url('../../static/img/bg-home.png') !important;"+
                     'background-position:left;'+
                     'background-repeat: no-repeat;'+
                     'background-size: cover;'+
+                '}'+
+                '.right_{'+
+                    'float: left !important;'+
+                    'text-align: left !important;'+
                 '}'+
             '}'+
         '</style>';

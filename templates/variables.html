@@ -2,22 +2,23 @@
 {% block title %}View {{dict}}{% endblock %}
 {% block body %}
     <div class="container" id="table">
+        <div class="row">
+            <div class="col s8 right_">
+                <h1>{{dict}}</h1>
+            </div>
+            <div class="col s4">
+                <img class="print" id="logo" src="/static/img/logo-cidacs.svg" >
+            </div>  
+        </div>
         <table class="responsive-table highlight tborder" id="printJS-dic">
             <thead>
-                <div class="row">
-                    <div class="col s8">
-                        <h1>{{dict}}</h1>
-                    </div>
-                    <div class="col s4">
-                        <img class="print" id="logo" src="/static/img/logo-cidacs.svg" >
-                    </div>  
-                </div>
                 <tr>
                     <th>Variable</th>
                     <th>Description</th>
                     <th>Type</th>
                     <th>Categories</th>
                     <th>Comments</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,16 @@
                     <td> {{variable.type}}</td>
                     <td>{{variable.categories}}</td>
                     <td> {{variable.comment}}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col s6">
+                                <form action="{{ url_for('variable_delete') }}" method="post" class="pull-right">
+                                    <input type="hidden" name="id" value="{{dict}} {{ variable.variable }}">
+                                    <input type="submit" class="btn red" data-toggle="confirmation" {# data-title="Tem Certeza??" #} value="Delete">
+                                </form>
+                            </div>
+                        </div>
+                    </td>
                 </tr>  
                 {% endfor %}  
             </tbody>

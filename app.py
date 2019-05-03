@@ -79,7 +79,6 @@ def edit_dictionary():
         nameDictionary_edit = str(request.values.get('id'))
         db_edit = db[nameDictionary_edit]
         db_edit_list = list(db_edit.find())
-        print (db_edit_list)
         return render_template('variables.html', dict = nameDictionary_edit, variables = db_edit_list) 
 
 @app.route("/search")
@@ -105,6 +104,16 @@ def dictionary_delete():
         for i in dic:
                 dictionarys.append(i)
         return render_template('dictionary.html', dictionarys=dictionarys)
+
+@app.route('/variable_delete', methods=['GET', 'POST'])
+def variable_delete():
+        name_variable_delete = str(request.values.get('id')).split()
+        col_var_del = db[name_variable_delete[0]].remove( { 'variable': (name_variable_delete[1]) }, 1)
+
+        db_edit_del = db[name_variable_delete[0]]
+        db_edit_list_del = list(db_edit_del.find())
+        return render_template('variables.html', dict = name_variable_delete[0], variables = db_edit_list_del)
+
 
 
         
