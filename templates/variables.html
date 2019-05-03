@@ -18,7 +18,7 @@
                     <th>Type</th>
                     <th>Categories</th>
                     <th>Comments</th>
-                    <th></th>
+                    <th class="no-print"></th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                     <td> {{variable.type}}</td>
                     <td>{{variable.categories}}</td>
                     <td> {{variable.comment}}</td>
-                    <td>
+                    <td class="no-print">
                         <div class="row">
                             <div class="col s6">
                                 <form action="{{ url_for('variable_delete') }}" method="post" class="pull-right">
