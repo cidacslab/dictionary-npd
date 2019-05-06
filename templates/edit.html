@@ -1,0 +1,90 @@
+{% extends 'layout/menu.html' %}
+{% block title %}Register{% endblock %}
+{% block body %}
+<body>
+        <div class="container">
+                <h1>{{dict}}</h1></br>
+                {% for var in vars %}
+                <form  action="/teste"  id="myForm" method="post" ><!--Formulário-->
+                    <div class="row">
+                        <div class="col s3">
+                            <input type="text" id="nameDictionary" name="nameDictionary" placeholder="Nome do Dicionário" value="{{dict}}">
+                        </div>
+                        <div class="col s3">
+                            <input type="text" id="nameVariable" name="nameVariable" placeholder="Nome da Variável" value="{{var.variable}}">
+                        </div>
+                        <div class="col s3">
+                            <input type="text" id="description" name="description" placeholder="Descrição" value="{{var.description}}">
+                        </div>
+                        <div class="input-field col s3">
+                            <select class="browser-default" id="type" onclick="selected(this.value)">
+                              <option  disabled selected>Tipo</option>
+                              <option >Byte</option>
+                              <option >Date</option>
+                              <option >Integer</option>
+                              <option >Long</option>
+                              <option >String</option>
+                            </select>
+                        </div>
+                        <div class="col s12">
+                            <input type="text" id="comment" name="comment" placeholder="Comentários" value="{{var.comment}}">   
+                        </div>
+                        <div class="col s12">
+                            <div class="card large my-card" id="boxCategorys" style='display: none'>
+                                <div class="card-content my-card">
+                                    <span class="card-title">Categorias</span> <!--Categorias para variaveis tipo Byte-->
+                                    <div class="row" id="category">
+                                        <div class="col s5">
+                                            <input type="text" class="nameCategory" id="nameCategory" name="nameCategory" placeholder="Nome da Categoria">     
+                                        </div>
+                                        <div class="col s2">
+                                            <input type="text" class="originalValue" id="originalValue" name="originalValue" placeholder="Valor Original">
+                                        </div>
+                                        <div class="col s1">
+                                            <img src='static/img/icons8-chevron-right-64.png'>
+                                        </div>
+                                        <div class="col s2">
+                                            <input type="text" class="standardizeValue" id="standardizeValue" name="standardizeValue" placeholder="Valor Padronizado">
+                                        </div>
+                                        <div class="col s2">
+                                            <a class="btn-floating btn-large waves-effect waves-light red" id="add-category" onclick="AddCampos()"><img src="static/img/icons8-soma-40.png" class="btn-add"></a>
+                                        </div>
+                                        <script> //Loop para mostrar mais campos de categorias.
+                                            for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+                                                document.write("<span id='linha"+iLoop+"' style='display:none'> <div class='col s5'> <input type='text' class='nameCategory' id='nameCategory"+iLoop+"' name='nameCategory"+iLoop+"' placeholder='Nome da Categoria'>" +    
+                                                "</div>"+
+                                                "<div class='col s2'>"+
+                                                    "<input type='text' class='originalValue' id='originalValue" +iLoop+"' name='originalValue'"+iLoop+" placeholder='Valor Original'>"+
+                                                "</div>"+
+                                                "<div class='col s1'>"+
+                                                    "<img src='static/img/icons8-chevron-right-64.png'>"+
+                                                "</div>"+
+                                                "<div class='col s2'>"+
+                                                    "<input type='text' class='standardizeValue' id='standardizeValue"+iLoop+"' name='standardizeValue"+iLoop+"' placeholder='Valor Padronizado'>"+
+                                                "</div>"+
+                                                "<div class='col s2'>"+
+                                                    "<a class='btn-floating btn-large waves-effect waves-light white' id='remove-category' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'><img src='static/img/icons8-excluir-50.png' class='btn-add'></a>"+    
+                                                "</div> </span>");
+                                        }
+                                        </script>
+                                        <input type="hidden" name="hidden1" id="hidden1">
+                                        <input type="hidden" name="hidden2" id="hidden2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    {% endfor %} 
+                    <input type="text"  name="result" hidden id="result">
+                    <div class="right">
+                        <button type="button"  id="add" class="waves-effect waves-light btn blue">Add</button>
+                        <button type="button"  id="compile" class="waves-effect waves-light btn">Compile</button>
+                        <button type="submit" value="submit" class="waves-effect waves-light btn red">Submit</button>
+                    </div>     
+                </form>
+            </div>
+            <!--JavaScript at end of body for optimized loading-->
+            <script type="text/javascript" src="static/lib/js/materialize.min.js"></script>
+            <script type="text/javascript" src="static/js/controller.js"></script>
+            {% endblock %}
+</body>

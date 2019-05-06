@@ -34,7 +34,7 @@ var values = new Array();
                             '"comment": "'+String($('#comment').val() +'" ,') +
                             '"description": "'+String($('#description').val() +'" ,') +
                             '"categories_std":  {'+ categories('.originalValue','.standardizeValue') + "}," +
-                            '"categories": {'+ categories('.originalValue','.nameCategory')  + "}}-" 
+                            '"categories": {'+ categories('.standardizeValue','.nameCategory')  + "}}-" 
                             // console.log(categories('.originalValue','.nameCategory') );
             values.push(value)
             $("#comment").val(""); 

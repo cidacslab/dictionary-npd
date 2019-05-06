@@ -114,6 +114,12 @@ def variable_delete():
         db_edit_list_del = list(db_edit_del.find())
         return render_template('variables.html', dict = name_variable_delete[0], variables = db_edit_list_del)
 
+@app.route('/edit_variable', methods=['GET', 'POST'])
+def edit_variable():
+        name_variable_edit = str(request.values.get('id')).split()
+        col_var_edit =  list(db[name_variable_edit[0]].find({'variable': (name_variable_edit[1])}))
+        return render_template('edit.html', dict = name_variable_edit[0], vars = col_var_edit)
+
 
 
         

@@ -37,6 +37,12 @@
                                     <input type="submit" class="btn red" data-toggle="confirmation" {# data-title="Tem Certeza??" #} value="Delete">
                                 </form>
                             </div>
+                            <div class="col s6">
+                                <form action="{{ url_for('edit_variable') }}" method="post" class="pull-right">
+                                    <input type="hidden" name="id" value="{{dict}} {{ variable.variable }}">
+                                    <input type="submit" class="btn"  value="Edit">
+                                </form>
+                            </div>
                         </div>
                     </td>
                 </tr>  
