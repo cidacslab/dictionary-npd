@@ -27,7 +27,20 @@
                     <td>{{variable.variable}}</td>
                     <td>{{variable.description}}</td>
                     <td> {{variable.type}}</td>
-                    <td>{{variable.categories}}</td>
+                    {% if variable.categories != {  } %}
+                    <td>
+                        <ul>
+
+                            <li>0 - Nulo</li>
+                            {% for categories in variable.categories %}
+                            <li>{{categories}} - {{variable.categories[categories]}}</li>
+                            {% endfor %}
+                            <li>99 - Inconsistência</li>
+                        </ul>
+                    </td> 
+                    {% else %}
+                    <td></td>
+                    {% endif %}
                     <td> {{variable.comment}}</td>
                     <td class="no-print">
                         <div class="row">

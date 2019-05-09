@@ -1,7 +1,7 @@
 {% extends 'layout/menu.html' %}
 {% block title %}Register{% endblock %}
 {% block body %}
-<body>
+<body onload="desc_type()">
         <div class="container">
                 <h1>{{dict}}</h1></br>
                 {% for var in vars %}
@@ -18,7 +18,8 @@
                         </div>
                         <div class="input-field col s3">
                             <select class="browser-default" id="type" onclick="selected(this.value)">
-                              <option  disabled selected>Tipo</option>
+                                <script>function desc_type(){document.getElementById("type").value = "{{var.type}}";}</script>
+                              <option  disabled>Tipo</option>
                               <option >Byte</option>
                               <option >Date</option>
                               <option >Integer</option>
