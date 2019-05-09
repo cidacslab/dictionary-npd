@@ -58,6 +58,16 @@ def teste():
                         collection.insert(var)    
         return render_template('index.html')
 
+@app.route('/update', methods=['POST'] )
+def update():
+        nameDic_update = str(request.form.get('nameDictionary'))
+        variable_update = str(request.form.get('result'))
+        id_update = str(request.form.get('id_var'))
+
+        print (id_update)       
+        db_update_list = list(db[nameDic_update].find())
+        return render_template('variables.html', dict = nameDic_update, variables = db_update_list)
+
 
 @app.route('/to_csv', methods=['POST'])
 def pandas_to_csv():

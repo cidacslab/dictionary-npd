@@ -46,5 +46,6 @@ var values = new Array();
             $('#nameVariable').focus();
             }else if(idClicked == 'compile'){
                 $("#result").val(values);
+                alert("Compilado com sucesso!");
             }
         });
