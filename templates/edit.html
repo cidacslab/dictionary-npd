@@ -6,6 +6,7 @@
                 <h1>{{dict}}</h1></br>
                 {% for var in vars %}
                 <form  action="/update"  id="myForm" method="post" ><!--Formulário-->
+                    <input type="text" name="id_var" id="id_var" hidden value="{{var._id}}">
                     <div class="row">
                         <div class="col s3">
                             <input type="text" id="nameDictionary" name="nameDictionary" placeholder="Nome do Dicionário" value="{{dict}}">
@@ -76,7 +77,6 @@
                                         </script>
                                         <input type="hidden" name="hidden1" id="hidden1">
                                         <input type="hidden" name="hidden2" id="hidden2">
-                                        <input type="text" name="id" id="id_var" hidden value="{{var._id}}">
                                     </div>
                                 </div>
                             </div>

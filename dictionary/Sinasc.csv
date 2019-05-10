@@ -1,5 +1,0 @@
-variable,categories_std,type
-nome ,{},String
-nome ,{},String
-nome ,{},String
-sexo,"{'0': '1', '1': '2'}",Byte

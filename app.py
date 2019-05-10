@@ -5,6 +5,7 @@ import json
 import pandas as pd
 import re
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, 'templates/')
@@ -28,6 +29,8 @@ def pymongo_python_sys():
         return mongo
 
 # mongo = pymongo_python_sys()
+#ObjectId = require('mongodb').ObjectID
+
 @app.route('/')
 def index():
         return render_template('index.html')
@@ -64,7 +67,11 @@ def update():
         variable_update = str(request.form.get('result'))
         id_update = str(request.form.get('id_var'))
 
-        print (id_update)       
+        variable_update  = variable_update.replace("'",'"').replace('-', '').replace(",}","}")
+        variable_update = json.loads(variable_update)
+
+        db[nameDic_update].update({'_id': ObjectId(id_update)}, {'$set': variable_update }, upsert = True)
+               
         db_update_list = list(db[nameDic_update].find())
         return render_template('variables.html', dict = nameDic_update, variables = db_update_list)
 
@@ -118,7 +125,7 @@ def dictionary_delete():
 @app.route('/variable_delete', methods=['GET', 'POST'])
 def variable_delete():
         name_variable_delete = str(request.values.get('id')).split()
-        col_var_del = db[name_variable_delete[0]].remove( { 'variable': (name_variable_delete[1]) }, 1)
+        col_var_del = db[name_variable_delete[0]].remove( { '_id': (ObjectId(name_variable_delete[1])) }, 1)
 
         db_edit_del = db[name_variable_delete[0]]
         db_edit_list_del = list(db_edit_del.find())
@@ -127,7 +134,7 @@ def variable_delete():
 @app.route('/edit_variable', methods=['GET', 'POST'])
 def edit_variable():
         name_variable_edit = str(request.values.get('id')).split()
-        col_var_edit =  list(db[name_variable_edit[0]].find({'variable': (name_variable_edit[1])}))
+        col_var_edit =  list(db[name_variable_edit[0]].find({'_id': ObjectID((name_variable_edit[1])) }))
         return render_template('edit.html', dict = name_variable_edit[0], vars = col_var_edit)
 
 
