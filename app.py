@@ -134,7 +134,7 @@ def variable_delete():
 @app.route('/edit_variable', methods=['GET', 'POST'])
 def edit_variable():
         name_variable_edit = str(request.values.get('id')).split()
-        col_var_edit =  list(db[name_variable_edit[0]].find({'_id': ObjectID((name_variable_edit[1])) }))
+        col_var_edit =  list(db[name_variable_edit[0]].find({'_id': ObjectId((name_variable_edit[1])) }))
         return render_template('edit.html', dict = name_variable_edit[0], vars = col_var_edit)
 
 

@@ -37,3 +37,13 @@
 input:-moz-placeholder { 
     color: rgba(8, 7, 7, 0.87) !important; 
 }
+
+.logo_menu{
+    width: 170px !important;
+    margin-top: -28px !important;
+    margin-left: 20px !important;
+}
+
+.brand_logo{
+    display: inline-flex !important;
+}

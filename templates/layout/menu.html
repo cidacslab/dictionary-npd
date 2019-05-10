@@ -12,14 +12,15 @@
         <script type="text/javascript" src="static/js/script.js"></script> <!--My JavaScript-->
     </head>
     <header class="no-print"> <!--Menu-->
+       
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
             <li><a href="{{url_for('index') }}">Home</a></li>
             <li><a href="{{ url_for('dictionary') }}">Ver Dicionários</a></li>
         </ul>
-        <nav class="grey lighten-2">
+        <nav class="grey lighten-5">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo"></a>
+                <a class="brand-logo brand_logo"> <img class="logo_menu"src="/static/img/logo-cidacs.svg"></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <!-- Dropdown Trigger -->
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="/static/img/icons8-usuário-de-gênero-neutro-48.png" class="user-icon">
