@@ -4,6 +4,7 @@ Debug Mode:
 ```
 $ pip install Flask
 $ python -m pip install pymongo
+$ pip install pandas
 $ export FLASK_ENV=development
 $ flask run
 
