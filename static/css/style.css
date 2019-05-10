@@ -32,10 +32,10 @@
 }
 
 ::-webkit-input-placeholder  { 
-    color: rgba(8, 7, 7, 0.87) !important; 
+    color: #616161 !important; 
 }
 input:-moz-placeholder { 
-    color: rgba(8, 7, 7, 0.87) !important; 
+    color: #616161 !important; 
 }
 
 .logo_menu{

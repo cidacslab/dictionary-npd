@@ -1,7 +1,7 @@
 {% extends 'layout/menu.html' %}
 {% block title %}Register{% endblock %}
 {% block body %}
-<body onload="desc_type()">
+<body onload="desc_type()" onload="selected(this.value)">   
         <div class="container">
                 <h1>{{dict}}</h1></br>
                 {% for var in vars %}
