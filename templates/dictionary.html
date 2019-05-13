@@ -5,11 +5,11 @@
         <table class="responsive-table highlight striped">
             <thead>
                 <tr>
-                    <th scope="col" class=""><h2>Nome do Dicionário</h2></th>
+                    <th scope="col" class=""><h2>Dictionary's Name</h2></th>
                     <th scope="col">
                         <form action="{{url_for('search')}}" method="get" class="navbar-form navbar-left">
                             <div class="form-group row">
-                                <input type="text" name="dictionary" class="form-control col s9" placeholder="Buscar..." id="dictionary" value>
+                                <input type="text" name="dictionary" class="form-control col s9" placeholder="Search..." id="dictionary" value>
                                 <button type='submit' class="col s3" style="color: transparent !important; background-color: transparent !important; border-style: double !important;">
                                     <?xml version="1.0" encoding="iso-8859-1"?>
                                     <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -35,12 +35,6 @@
                         <td>
                             <div class="row">
                                 <div class="col s4">
-                                    <form action="{{ url_for('dictionary_delete') }}" method="post" class="pull-right">
-                                        <input type="hidden" name="id" value="{{ dictionary }}">
-                                        <input type="submit" class="btn red" data-toggle="confirmation" {# data-title="Tem Certeza??" #} value="Delete">
-                                    </form>
-                                </div>
-                                <div class="col s4">
                                     <form action="{{ url_for('pandas_to_csv') }}" method="post" class="pull-right">
                                         <input type="hidden" name="id" value="{{ dictionary }}">
                                         <input type="submit" class="btn green"  value="Create">
@@ -50,6 +44,12 @@
                                     <form action="{{ url_for('edit_dictionary') }}" method="post" class="pull-right">
                                         <input type="hidden" name="id" value="{{ dictionary }}">
                                         <input type="submit" class="btn"  value="Edit">
+                                    </form>
+                                </div>
+                                <div class="col s4">
+                                    <form action="{{ url_for('dictionary_delete') }}" method="post" class="pull-right">
+                                        <input type="hidden" name="id" value="{{ dictionary }}">
+                                        <input type="submit" class="btn red" data-toggle="confirmation" {# data-title="Tem Certeza??" #} value="Delete">
                                     </form>
                                 </div>
                             </div>

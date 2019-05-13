@@ -58,8 +58,14 @@ def teste():
                         except:
                                 return "erro"
                         collection = db[nameDictionary]
-                        collection.insert(var)    
-        return render_template('index.html')
+                        collection.insert(var) 
+
+        dic_submit = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
+        dics_submit = []
+        for i in dic_submit:
+                dics_submit.append(i)
+           
+        return render_template('dictionary.html', dictionarys=dics_submit)
 
 @app.route('/update', methods=['POST'] )
 def update():

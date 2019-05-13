@@ -9,18 +9,18 @@
                     <input type="text" name="id_var" id="id_var" hidden value="{{var._id}}">
                     <div class="row">
                         <div class="col s3">
-                            <input type="text" id="nameDictionary" name="nameDictionary" placeholder="Nome do Dicionário" value="{{dict}}">
+                            <input type="text" id="nameDictionary" name="nameDictionary" placeholder="Dictionary's Name" value="{{dict}}">
                         </div>
                         <div class="col s3">
-                            <input type="text" id="nameVariable" name="nameVariable" placeholder="Nome da Variável" value="{{var.variable}}">
+                            <input type="text" id="nameVariable" name="nameVariable" placeholder="Variable's Name" value="{{var.variable}}">
                         </div>
                         <div class="col s3">
-                            <input type="text" id="description" name="description" placeholder="Descrição" value="{{var.description}}">
+                            <input type="text" id="description" name="description" placeholder="Description" value="{{var.description}}">
                         </div>
                         <div class="input-field col s3">
                             <select class="browser-default" id="type" onclick="selected(this.value)">
                                 <script>function desc_type(){document.getElementById("type").value = "{{var.type}}";}</script>
-                              <option  disabled>Tipo</option>
+                              <option  disabled>Type</option>
                               <option >Byte</option>
                               <option >Date</option>
                               <option >Integer</option>
@@ -29,21 +29,21 @@
                             </select>
                         </div>
                         <div class="col s12">
-                            <input type="text" id="comment" name="comment" placeholder="Comentários" value="{{var.comment}}">   
+                            <input type="text" id="comment" name="comment" placeholder="Comments" value="{{var.comment}}">   
                         </div>
                         <div class="col s12">
                             <div class="card large my-card" id="boxCategorys" style='display: none'>
                                 <div class="card-content my-card">
-                                    <span class="card-title">Categorias</span> <!--Categorias para variaveis tipo Byte-->
+                                    <span class="card-title">Categorys</span> <!--Categorias para variaveis tipo Byte-->
                                     <div class="row" id="category">
                                         <div class="col s5">
                                             {% for categorias in var.categories.values() %}
-                                            <input type="text" class="nameCategory" id="nameCategory" name="nameCategory" placeholder="Nome da Categoria" value="{{categorias}}">    
+                                            <input type="text" class="nameCategory" id="nameCategory" name="nameCategory" placeholder="Category's Name" value="{{categorias}}">    
                                             {% endfor %} 
                                         </div>
                                         <div class="col s2">
                                             {% for originial in var.categories_std.keys() %}
-                                            <input type="text" class="originalValue" id="originalValue" name="originalValue" placeholder="Valor Original" value="{{originial}}">
+                                            <input type="text" class="originalValue" id="originalValue" name="originalValue" placeholder="Original Value" value="{{originial}}">
                                             {% endfor %}
                                         </div>
                                         <div class="col s1">
@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="col s2">
                                             {% for std in var.categories.keys() %}
-                                            <input type="text" class="standardizeValue" id="standardizeValue" name="standardizeValue" placeholder="Valor Padronizado" value="{{std}}">
+                                            <input type="text" class="standardizeValue" id="standardizeValue" name="standardizeValue" placeholder="Standardized Value" value="{{std}}">
                                             {% endfor %}
                                         </div>
                                         <div class="col s2">
@@ -59,16 +59,16 @@
                                         </div>
                                         <script> //Loop para mostrar mais campos de categorias.
                                             for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
-                                                document.write("<span id='linha"+iLoop+"' style='display:none'> <div class='col s5'> <input type='text' class='nameCategory' id='nameCategory"+iLoop+"' name='nameCategory"+iLoop+"' placeholder='Nome da Categoria'>" +    
+                                                document.write("<span id='linha"+iLoop+"' style='display:none'> <div class='col s5'> <input type='text' class='nameCategory' id='nameCategory"+iLoop+"' name='nameCategory"+iLoop+"' placeholder='Category's Name'>" +    
                                                 "</div>"+
                                                 "<div class='col s2'>"+
-                                                    "<input type='text' class='originalValue' id='originalValue" +iLoop+"' name='originalValue'"+iLoop+" placeholder='Valor Original'>"+
+                                                    "<input type='text' class='originalValue' id='originalValue" +iLoop+"' name='originalValue'"+iLoop+" placeholder='Original Value'>"+
                                                 "</div>"+
                                                 "<div class='col s1'>"+
                                                     "<img src='static/img/icons8-chevron-right-64.png'>"+
                                                 "</div>"+
                                                 "<div class='col s2'>"+
-                                                    "<input type='text' class='standardizeValue' id='standardizeValue"+iLoop+"' name='standardizeValue"+iLoop+"' placeholder='Valor Padronizado'>"+
+                                                    "<input type='text' class='standardizeValue' id='standardizeValue"+iLoop+"' name='standardizeValue"+iLoop+"' placeholder='Standardized Value'>"+
                                                 "</div>"+
                                                 "<div class='col s2'>"+
                                                     "<a class='btn-floating btn-large waves-effect waves-light white' id='remove-category' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'><img src='static/img/icons8-excluir-50.png' class='btn-add'></a>"+    
