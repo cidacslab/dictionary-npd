@@ -87,6 +87,17 @@ function selected(value){
     }
 }
 
+function type_disabled(){
+        var value = document.getElementById('type');
+        if(value == 'Type'){
+                if(!document.getElementById('add').disabled) document.getElementById('add').disabled=true;
+                if(!document.getElementById('compile').disabled) document.getElementById('compile').disabled=true;
+        }else{
+                if(document.getElementById('add').disabled) document.getElementById('add').disabled=false;
+                if(document.getElementById('compile').disabled) document.getElementById('compile').disabled=false;
+        }
+}
+
 
 
 
