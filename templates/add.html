@@ -1,7 +1,7 @@
 {% extends 'layout/menu.html' %}
 {% block title %}Register{% endblock %}
 {% block body %}
-    <body onload="type_disabled()">
+    <body>
         <!-- {
             'name_dictionary':'name_dataset,
             'variable:':[
@@ -25,7 +25,7 @@
             <form  action="/teste"  id="myForm" method="post" ><!--Formulário-->
                 <div class="row">
                     <div class="col s3">
-                            <input type="text" id="nameDictionary" name="nameDictionary" placeholder="Dictionary's Name" value="{{dict}}" disabled>
+                        <input type="text" id="nameDictionary" name="nameDictionary" placeholder="Dictionary's Name" value="{{dict}}" disabled>
                     </div>
                     <div class="col s3">
                         <input type="text" id="nameVariable" name="nameVariable" placeholder="Variable's Name" autocomplete>
@@ -92,9 +92,10 @@
                     </div>
                 </div> 
                 <input type="text"  name="result" hidden id="result">
+                <input type="text" name="nameDictionary_add" hidden id="nameDictionary_add" value="{{dict}}">
                 <div class="right">
-                    <button type="button"  id="add" class="waves-effect waves-light btn blue">Add</button>
-                    <button type="button"  id="compile" class="waves-effect waves-light btn" >Compile</button>
+                    <button type="button"  id="add" class="waves-effect waves-light btn blue" disabled>Add</button>
+                    <button type="button"  id="compile" class="waves-effect waves-light btn" disabled>Compile</button>
                     <button type="submit" value="submit" class="waves-effect waves-light btn red">Submit</button>
                 </div>     
             </form>

@@ -45,15 +45,20 @@ def dictionary():
         return render_template('dictionary.html', dictionarys=dictionarys)
 
 #Inserção das variáveis e criação do dicionário no banco
-@app.route('/teste', methods=['POST']) 
+@app.route('/teste', methods=['POST', 'GET']) 
 def teste():
         nameDictionary = str(request.form.get('nameDictionary'))
         variables = str(request.form.get('result'))
 
+        if nameDictionary == "None":
+                nameDictionary = str(request.values.get('nameDictionary_add'))
+
+        print (nameDictionary)
+        print (bool(nameDictionary))
         variables  = variables.replace("'",'"').replace('-,','-').split('-')
         nameDictionary = nameDictionary.replace(" ", "_")
         nameDictionary = re.sub("\W", "", nameDictionary)
-
+        
         for var in variables:
                 if var is not '':
                         try:
@@ -74,7 +79,7 @@ def teste():
 #Update de uma variável no banco
 @app.route('/update', methods=['POST'] )
 def update():
-        nameDic_update = str(request.form.get('nameDictionary'))
+        nameDic_update = str(request.form.get('nameDictionary_up'))
         variable_update = str(request.form.get('result'))
         id_update = str(request.form.get('id_var'))
 

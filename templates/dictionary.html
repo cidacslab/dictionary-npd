@@ -47,10 +47,25 @@
                                     </form>
                                 </div>
                                 <div class="col s4">
-                                    <form action="{{ url_for('dictionary_delete') }}" method="post" class="pull-right">
-                                        <input type="hidden" name="id" value="{{ dictionary }}">
-                                        <input type="submit" class="btn red" data-toggle="confirmation" {# data-title="Tem Certeza??" #} value="Delete">
-                                    </form>
+                                    <a class="btn red modal-trigger" href="#{{dictionary}}" >Delete</a>
+                                    <div id="{{dictionary}}" class="modal bottom-sheet">
+                                        <div class="modal-content">
+                                            <h4>Are you sure you want to delete a dictionary {{dictionary}}?</h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{{ url_for('dictionary_delete') }}" method="post" class="pull-right">
+                                                <input type="hidden" name="id" value="{{ dictionary }}">
+                                                <div class="row left">
+                                                    <div class="col s6">
+                                                        <input type="submit" class="btn red modal-close" value="Yes" style="margin-left: 20px;">
+                                                    </div>
+                                                    <div class="col s6">
+                                                        <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="margin-right: 30px;">No</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </td>

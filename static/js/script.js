@@ -87,6 +87,7 @@ function selected(value){
     }
 }
 
+//Desabilitar os buttons add e compile caso o type esteja null
 function type_disabled(){
         var value = document.getElementById('type');
         if(value == 'Type'){
@@ -97,6 +98,11 @@ function type_disabled(){
                 if(document.getElementById('compile').disabled) document.getElementById('compile').disabled=false;
         }
 }
+
+$(document).ready(function(){
+        $('.modal').modal();
+      });
+              
 
 
 
