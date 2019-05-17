@@ -35,6 +35,7 @@ def pymongo_python_sys():
 def index():
         return render_template('index.html')
 
+#Listagem de diconários do banco
 @app.route('/dictionary')
 def dictionary():
         dic = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
@@ -43,6 +44,7 @@ def dictionary():
                 dictionarys.append(i)
         return render_template('dictionary.html', dictionarys=dictionarys)
 
+#Inserção das variáveis e criação do dicionário no banco
 @app.route('/teste', methods=['POST']) 
 def teste():
         nameDictionary = str(request.form.get('nameDictionary'))
@@ -69,6 +71,7 @@ def teste():
            
         return render_template('dictionary.html', dictionarys=dics_submit)
 
+#Update de uma variável no banco
 @app.route('/update', methods=['POST'] )
 def update():
         nameDic_update = str(request.form.get('nameDictionary'))
@@ -83,7 +86,7 @@ def update():
         db_update_list = list(db[nameDic_update].find())
         return render_template('variables.html', dict = nameDic_update, variables = db_update_list)
 
-
+#Criação do dicionário em csv para padronização
 @app.route('/to_csv', methods=['POST'])
 def pandas_to_csv():
 
@@ -99,6 +102,7 @@ def pandas_to_csv():
         df.to_csv(my_file+path_csv,index=False)
         return render_template('index.html')
 
+#Abrir tela de edição de um dicionário, com listagem das variáveis
 @app.route("/edit_dictionary", methods=['GET', 'POST'])
 def edit_dictionary():
         nameDictionary_edit = str(request.values.get('id'))
@@ -106,6 +110,7 @@ def edit_dictionary():
         db_edit_list = list(db_edit.find())
         return render_template('variables.html', dict = nameDictionary_edit, variables = db_edit_list) 
 
+#Fazer uma pesquisa de dicionários no banco
 @app.route("/search")
 def search():
         nameDictionary_search = str(request.args.get('dictionary'))
@@ -118,6 +123,7 @@ def search():
         #list(db.hans.find())
         return render_template('dictionary.html', dictionarys = search_dic)
 
+#Deletar completamente o dicionário no banco
 @app.route('/dictionary_delete', methods=['GET', 'POST'])
 def dictionary_delete():
         nameDictionary_delete = str(request.values.get('id'))
@@ -130,6 +136,7 @@ def dictionary_delete():
                 dictionarys.append(i)
         return render_template('dictionary.html', dictionarys=dictionarys)
 
+#Deletar uma variável na coleção
 @app.route('/variable_delete', methods=['GET', 'POST'])
 def variable_delete():
         name_variable_delete = str(request.values.get('id')).split()
@@ -139,12 +146,17 @@ def variable_delete():
         db_edit_list_del = list(db_edit_del.find())
         return render_template('variables.html', dict = name_variable_delete[0], variables = db_edit_list_del)
 
+#Acessar página para edição de variável
 @app.route('/edit_variable', methods=['GET', 'POST'])
 def edit_variable():
         name_variable_edit = str(request.values.get('id')).split()
         col_var_edit =  list(db[name_variable_edit[0]].find({'_id': ObjectId((name_variable_edit[1])) }))
         return render_template('edit.html', dict = name_variable_edit[0], vars = col_var_edit)
 
+@app.route('/add_variable', methods=['GET', 'POST'])
+def add_variable():
+        name_dic_add = str(request.values.get('id'))
+        return render_template('add.html', dict=name_dic_add)
 
 
         

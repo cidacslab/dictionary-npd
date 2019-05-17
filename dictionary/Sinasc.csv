@@ -1,0 +1,7 @@
+variable,categories_std,type
+dt_nasc,{},Date
+racacor,"{'0': '1', '1': '2', '2': '3'}",Byte
+novo,"{'0': '1', '1': '2'}",Byte
+nome,{},String
+origem,{},String
+nomemae,{},String

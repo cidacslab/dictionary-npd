@@ -62,7 +62,10 @@
                 {% endfor %}  
             </tbody>
         </table>
-        
+        <form action="{{ url_for('add_variable') }}" method="post"> 
+            <input type="hidden" name="id" value="{{dict}}">
+            <input type="submit" class="btn right no-print blue" value="Add Variable" style="margin-top: 20px !important; margin-left: 10px;">
+        </form>
         <button type="button" onclick="printJS()"
         class="btn-print btn deep-orange darken-4 right no-print" style="margin-top: 20px !important;">
                 Print Dictionary
