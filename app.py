@@ -49,6 +49,9 @@ def teste():
         variables = str(request.form.get('result'))
 
         variables  = variables.replace("'",'"').replace('-,','-').split('-')
+        nameDictionary = nameDictionary.replace(" ", "_")
+        nameDictionary = re.sub("\W", "", nameDictionary)
+        print (nameDictionary)
 
         for var in variables:
                 if var is not '':
