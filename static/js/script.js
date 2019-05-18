@@ -89,8 +89,9 @@ function selected(value){
 
 //Desabilitar os buttons add e compile caso o type esteja null
 function type_disabled(){
-        var value = document.getElementById('type');
-        if(value == 'Type'){
+        var tipo = document.getElementById('type');
+        var name = document.getElementById('nameVariable');
+        if(tipo == 'Type' || name == null || name == ""){
                 if(!document.getElementById('add').disabled) document.getElementById('add').disabled=true;
                 if(!document.getElementById('compile').disabled) document.getElementById('compile').disabled=true;
         }else{
@@ -99,6 +100,7 @@ function type_disabled(){
         }
 }
 
+//Criação do modal de alerta para o delete!
 $(document).ready(function(){
         $('.modal').modal();
       });

@@ -37,7 +37,7 @@
                                 <div class="col s4">
                                     <form action="{{ url_for('pandas_to_csv') }}" method="post" class="pull-right">
                                         <input type="hidden" name="id" value="{{ dictionary }}">
-                                        <input type="submit" class="btn green"  value="Create">
+                                        <input type="submit" class="btn green"  value="Create" onclick="alert('Created CSV dictionary successfully!')">
                                     </form>
                                 </div>
                                 <div class="col s4">

@@ -104,7 +104,7 @@ def pandas_to_csv():
         df = df[['variable','categories_std','type']]
         path_csv = ('/dictionary/'+nameDictionary_csv+'.csv')
         my_file = os.getcwd()
-        df.to_csv(my_file+path_csv,index=False)
+        df.to_csv(my_file+path_csv,index=False, header=False)
         return render_template('index.html')
 
 #Abrir tela de edição de um dicionário, com listagem das variáveis
@@ -158,6 +158,7 @@ def edit_variable():
         col_var_edit =  list(db[name_variable_edit[0]].find({'_id': ObjectId((name_variable_edit[1])) }))
         return render_template('edit.html', dict = name_variable_edit[0], vars = col_var_edit)
 
+#Acessar página para adicionar novas variáveis
 @app.route('/add_variable', methods=['GET', 'POST'])
 def add_variable():
         name_dic_add = str(request.values.get('id'))
