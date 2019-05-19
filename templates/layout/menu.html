@@ -8,26 +8,28 @@
         <link type="text/css" rel="stylesheet" href="static/lib/css/materialize.min.css"  media="screen,projection"/>  <!--Import materialize.css-->
         <link type='text/css' rel="stylesheet" href="static/css/style.css"> <!-- My CSS -->
         <link rel="shortcut icon" href="/static/img/41878168.png" type="image/x-icon"><!--Favicon-->
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"> </script>
+        <script src="static/lib/js/jquery.min.js" type="text/javascript"> </script> <!--JQuery 3.3.1-->
         <script type="text/javascript" src="static/js/script.js"></script> <!--My JavaScript-->
     </head>
     <header class="no-print"> <!--Menu-->
        
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
-            <li><a href="{{url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('dictionary') }}">View Dictionarys</a></li>
+            <li><a href="{{url_for('index') }}" class="text-menu">Home</a></li>
+            <li><a href="{{ url_for('dictionary') }}" class="text-menu">View Dictionarys</a></li>
         </ul>
-        <nav class="grey lighten-5">
-            <div class="nav-wrapper">
-                <a class="brand-logo brand_logo"> <img class="logo_menu"src="/static/img/logo-cidacs.svg"></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <!-- Dropdown Trigger -->
-                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="/static/img/icons8-usuário-de-gênero-neutro-48.png" class="user-icon">
-                        <img src="/static/img/icons8-ordem-descendente-48.png" class="dropdown-icon"></a></li>
-                </ul>
-            </div>
-        </nav>
+        <div class="navbar-fixed"> 
+            <nav class="grey lighten-5">
+                <div class="nav-wrapper">
+                    <a class="brand-logo brand_logo"> <img class="logo_menu"src="/static/img/logo-cidacs.svg"></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="/static/img/icons8-usuário-de-gênero-neutro-48.png" class="user-icon">
+                            <img src="/static/img/icons8-ordem-descendente-48.png" class="dropdown-icon"></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </header>
     {% block body %}{% endblock %}
 </html>

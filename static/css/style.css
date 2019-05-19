@@ -47,3 +47,14 @@ input:-moz-placeholder {
 .brand_logo{
     display: inline-flex !important;
 }
+
+body{
+    background: url(/static/img/bg-home.png);
+    background-size: cover;
+    background-repeat: repeat;
+    background-color: #f5f1eb;
+}
+
+li a .text-menu{
+    color: #8c2416 !important;
+}

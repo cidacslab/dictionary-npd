@@ -100,10 +100,11 @@ function type_disabled(){
         }
 }
 
+
 //Criação do modal de alerta para o delete!
 $(document).ready(function(){
         $('.modal').modal();
-      });
+});
               
 
 

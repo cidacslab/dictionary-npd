@@ -27,7 +27,12 @@ var values = new Array();
             $("button").click(function(e){ 
                 var idClicked = e.target.id;
                 if(idClicked == 'add'){
-                    var value = 
+                    if(document.getElementById("nameVariable").value == ""){
+                        alert("Please, fill in the variable's name");
+                        document.getElementById("nameVariable").focus();
+                        return false
+                    }else{
+                        var value = 
                         "{"+
                             '"variable": "'+String($('#nameVariable').val()+'" ,')+
                             '"type": "'+String($('#type').val() +'" ,') +
@@ -36,6 +41,7 @@ var values = new Array();
                             '"categories_std":  {'+ categories('.originalValue','.standardizeValue') + "}," +
                             '"categories": {'+ categories('.standardizeValue','.nameCategory')  + "}}-" 
                             // console.log(categories('.originalValue','.nameCategory') );
+                    }
             values.push(value)
             $("#comment").val(""); 
             $('#nameVariable').val('');

@@ -53,8 +53,6 @@ def teste():
         if nameDictionary == "None":
                 nameDictionary = str(request.values.get('nameDictionary_add'))
 
-        print (nameDictionary)
-        print (bool(nameDictionary))
         variables  = variables.replace("'",'"').replace('-,','-').split('-')
         nameDictionary = nameDictionary.replace(" ", "_")
         nameDictionary = re.sub("\W", "", nameDictionary)
