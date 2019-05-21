@@ -111,7 +111,8 @@ def edit_dictionary():
         nameDictionary_edit = str(request.values.get('id'))
         db_edit = db[nameDictionary_edit]
         db_edit_list = list(db_edit.find())
-        return render_template('variables.html', dict = nameDictionary_edit, variables = db_edit_list) 
+        variable_count = db_edit.count()
+        return render_template('variables.html', dict = nameDictionary_edit, variables = db_edit_list, total_variable = variable_count) 
 
 #Fazer uma pesquisa de dicionários no banco
 @app.route("/search")
