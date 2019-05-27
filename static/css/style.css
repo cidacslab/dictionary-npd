@@ -40,8 +40,12 @@ input:-moz-placeholder {
 
 .logo_menu{
     width: 170px !important;
-    margin-top: -28px !important;
+    margin-top: -20px !important;
     margin-left: 20px !important;
+}
+
+nav{
+    height: 80px;
 }
 
 .brand_logo{
@@ -57,4 +61,13 @@ body{
 
 li a .text-menu{
     color: #8c2416 !important;
+}
+
+@-moz-document url-prefix(){
+    .logo_menu{
+        width: 170px !important;
+        margin-top: 0px !important;
+        margin-left: 20px !important;
+    }
+    
 }
