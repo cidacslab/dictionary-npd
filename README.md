@@ -15,3 +15,7 @@ $ flask run
 - Flask: http://flask.pocoo.org/
 - PyMongo: https://api.mongodb.com/python/current/
 - Pandas: https://pandas.pydata.org/pandas-docs/stable/
+
+# Packages
+<a href="https://github.com/cidacslab/dictionary-npd/blob/master/requirements.txt">Requirements</a>
+
