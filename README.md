@@ -13,7 +13,7 @@ $ flask run
 # Important Sources
 
 - Flask: http://flask.pocoo.org/
-- MongoDB: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/
+- MongoDB (Install in Red Hat Enterprise or CentOS Linux): https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/
 - PyMongo: https://api.mongodb.com/python/current/
 - Pandas: https://pandas.pydata.org/pandas-docs/stable/
 
