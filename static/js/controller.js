@@ -50,8 +50,7 @@ var values = new Array();
             $('.standardizeValue').val('');
             $('.nameCategory').val('');
             $('#nameVariable').focus();
-            }else if(idClicked == 'compile'){
-                $("#result").val(values);
-                alert("Compiled successfully!");
+            $("#result").val(values);
+            alert("Compiled successfully!");
             }
         });
