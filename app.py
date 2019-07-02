@@ -31,6 +31,7 @@ def pymongo_python_sys():
 # mongo = pymongo_python_sys()
 #ObjectId = require('mongodb').ObjectID
 
+
 @app.route('/')
 def index():
         return render_template('index.html')
@@ -81,8 +82,11 @@ def update():
         variable_update = str(request.form.get('result'))
         id_update = str(request.form.get('id_var'))
 
-        variable_update  = variable_update.replace("'",'"').replace('-', '').replace(",}","}")
-        variable_update = json.loads(variable_update)
+        try:
+                variable_update  = variable_update.replace("'",'"').replace('-', '').replace(",}","}")
+                variable_update = json.loads(variable_update)
+        except:
+                return "Oops! You forgot to add the variable"
 
         db[nameDic_update].update({'_id': ObjectId(id_update)}, {'$set': variable_update }, upsert = True)
                
@@ -162,6 +166,36 @@ def edit_variable():
 def add_variable():
         name_dic_add = str(request.values.get('id'))
         return render_template('add.html', dict=name_dic_add)
+
+#Incluir dicionário através de arquivo csv
+@app.route('/send_csv', methods=['GET', 'POST'])
+def send_csv():
+        nameDictionary = str(request.form.get('nameDictionary'))
+        csv = str(request.values.get('file_csv'))
+        
+
+        nameDictionary = nameDictionary.replace(" ", "_")
+        nameDictionary = re.sub("\W", "", nameDictionary)
+
+        df = pd.read_csv(csv) #csv file which you want to import
+        _dic = {}
+        for item in range(len(df.count())):
+                df.categories[item] = _dic
+                df.categories_std[item] = _dic
+       
+        records_ = df.to_dict(orient = 'records')
+
+        collection = db[nameDictionary]               
+        collection.insert(records_)
+
+        dic_submit = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
+        dics_submit = []
+        for i in dic_submit:
+                dics_submit.append(i)
+           
+        return render_template('dictionary.html', dictionarys=dics_submit)      
+
+
 
 
         

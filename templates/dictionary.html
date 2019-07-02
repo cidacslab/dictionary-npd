@@ -73,6 +73,24 @@
                     {% endfor %}
             </tbody>
         </table>
+        <button onclick="csv()" class="right btn green" style="margin-right: 48px;">Include CSV</button>
+    </div>
+    <div class=" container" style="display: none;" id="csv_form">
+        <form method="POST" action="/send_csv">
+            <input type="text" id="nameDictionary" name="nameDictionary" placeholder="Dictionary's Name" autocomplete>
+            <input type="text" id="file_csv" name="file_csv" placeholder="CSV file path" autocomplete>
+            <input type="submit" id='send' name="send" value="Send" class="btn blue right" style="margin-right: 48px;">
+        </form>
     </div>
     <script type="text/javascript" src="static/lib/js/materialize.min.js"></script>
+    <script>
+        function csv(){
+            var form = document.getElementById('csv_form');
+                if(form.style.display = 'none'){
+                    form.style.display = 'block';
+                }else{
+                    form.style.display = 'none';
+            }
+        }
+    </script>
 {% endblock %}
