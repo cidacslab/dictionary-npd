@@ -36,7 +36,7 @@ def pymongo_python_sys():
 def index():
         return render_template('index.html')
 
-#Listagem de diconários do banco
+#Listagem de diconarios do banco
 @app.route('/dictionary')
 def dictionary():
         dic = db.collection_names(include_system_collections=False) #Incluir select para buscar todos os dicionarios no banco.
@@ -45,7 +45,7 @@ def dictionary():
                 dictionarys.append(i)
         return render_template('dictionary.html', dictionarys=dictionarys)
 
-#Inserção das variáveis e criação do dicionário no banco
+#Insercao das variaveis e criacao do dicionario no banco
 @app.route('/teste', methods=['POST', 'GET']) 
 def teste():
         nameDictionary = str(request.form.get('nameDictionary'))
@@ -75,7 +75,7 @@ def teste():
            
         return render_template('dictionary.html', dictionarys=dics_submit)
 
-#Update de uma variável no banco
+#Update de uma variavel no banco
 @app.route('/update', methods=['POST'] )
 def update():
         nameDic_update = str(request.form.get('nameDictionary_up'))
@@ -93,7 +93,7 @@ def update():
         db_update_list = list(db[nameDic_update].find())
         return render_template('variables.html', dict = nameDic_update, variables = db_update_list)
 
-#Criação do dicionário em csv para padronização
+#Criacao do dicionario em csv para padronizacao
 @app.route('/to_csv', methods=['POST'])
 def pandas_to_csv():
 
@@ -109,7 +109,7 @@ def pandas_to_csv():
         df.to_csv(my_file+path_csv,index=False, header=False)
         return render_template('index.html')
 
-#Abrir tela de edição de um dicionário, com listagem das variáveis
+#Abrir tela de edicao de um dicionario, com listagem das variaveis
 @app.route("/edit_dictionary", methods=['GET', 'POST'])
 def edit_dictionary():
         nameDictionary_edit = str(request.values.get('id'))
@@ -118,7 +118,7 @@ def edit_dictionary():
         variable_count = db_edit.count()
         return render_template('variables.html', dict = nameDictionary_edit, variables = db_edit_list, total_variable = variable_count) 
 
-#Fazer uma pesquisa de dicionários no banco
+#Fazer uma pesquisa de dicionarios no banco
 @app.route("/search")
 def search():
         nameDictionary_search = str(request.args.get('dictionary'))
@@ -131,7 +131,7 @@ def search():
         #list(db.hans.find())
         return render_template('dictionary.html', dictionarys = search_dic)
 
-#Deletar completamente o dicionário no banco
+#Deletar completamente o dicionario no banco
 @app.route('/dictionary_delete', methods=['GET', 'POST'])
 def dictionary_delete():
         nameDictionary_delete = str(request.values.get('id'))
@@ -144,7 +144,7 @@ def dictionary_delete():
                 dictionarys.append(i)
         return render_template('dictionary.html', dictionarys=dictionarys)
 
-#Deletar uma variável na coleção
+#Deletar uma variavel na colecao
 @app.route('/variable_delete', methods=['GET', 'POST'])
 def variable_delete():
         name_variable_delete = str(request.values.get('id')).split()
@@ -154,20 +154,20 @@ def variable_delete():
         db_edit_list_del = list(db_edit_del.find())
         return render_template('variables.html', dict = name_variable_delete[0], variables = db_edit_list_del)
 
-#Acessar página para edição de variável
+#Acessar pagina para edicao de variavel
 @app.route('/edit_variable', methods=['GET', 'POST'])
 def edit_variable():
         name_variable_edit = str(request.values.get('id')).split()
         col_var_edit =  list(db[name_variable_edit[0]].find({'_id': ObjectId((name_variable_edit[1])) }))
         return render_template('edit.html', dict = name_variable_edit[0], vars = col_var_edit)
 
-#Acessar página para adicionar novas variáveis
+#Acessar pagina para adicionar novas variaveis
 @app.route('/add_variable', methods=['GET', 'POST'])
 def add_variable():
         name_dic_add = str(request.values.get('id'))
         return render_template('add.html', dict=name_dic_add)
 
-#Incluir dicionário através de arquivo csv
+#Incluir dicionario atraves de arquivo csv
 @app.route('/send_csv', methods=['GET', 'POST'])
 def send_csv():
         nameDictionary = str(request.form.get('nameDictionary'))
