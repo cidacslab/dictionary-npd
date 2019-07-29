@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+                ServerName dictionary.cidacs
+                ServerAdmin admin@mywebsite.com
+                WSGIScriptAlias / /home/juancaio/Documents/juan/dictionary_npd/flask.wsgi
+                WSGIDaemonProcess dictionary_npd python-path=/home/juancaio/Documents/juan/dictionary_npd:/home/juancaio/Documents/juan/dictionary_npd/venv/lib/python2.7/site-packages
+                WSGIProcessGroup dictionary_npd
+                <Directory /home/juancaio/Documents/juan/dictionary_npd/>
+                        Require all granted
+                </Directory>
+                Alias /static /home/juancaio/Documents/juan/dictionary_npd/static
+                <Directory /home/juancaio/Documents/juan/dictionary_npd/>
+                        Require all granted
+                </Directory>
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                LogLevel warn
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
