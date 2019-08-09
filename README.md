@@ -10,14 +10,21 @@ $ flask run
 
 ```
 
-# Important Sources
+## Important Sources
 
-- Flask: http://flask.pocoo.org/
-- MongoDB (Download): https://www.mongodb.com/download-center/community
-- MongoDB (Install in Red Hat Enterprise or CentOS Linux): https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/
-- PyMongo: https://api.mongodb.com/python/current/
-- Pandas: https://pandas.pydata.org/pandas-docs/stable/
+- <a href="http://flask.pocoo.org/">Flask</a>
+- <a href="https://www.mongodb.com/download-center/community">MongoDB (Download)</a> 
+- <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/">MongoDB (Install in Red Hat Enterprise or CentOS Linux)</a>
+- <a href="https://api.mongodb.com/python/current/">PyMongo</a>
+- <a href="https://pandas.pydata.org/pandas-docs/stable/">Pandas</a>
 
-# Packages
+## Apache Web Service
+```
+$ sudo yum -y install httpd (Exemple for Red Hat Enterprise or CentOS Linux)
+$ yum install mod_wsgi
+```
+- <a href="https://flask.palletsprojects.com/en/1.1.x/deploying/mod_wsgi/">Mod_wsgi (Apache)</a>
+
+## Packages
 <a href="https://github.com/cidacslab/dictionary-npd/blob/master/requirements.txt">Requirements</a>
 
