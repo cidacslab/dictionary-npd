@@ -100,6 +100,16 @@ function type_disabled(){
         }
 }
 
+//Abilitar botão submit
+function submit_show(){
+       if (document.getElementById('add').disabled){
+                document.getElementById('submit').disabled=true;
+       }else{
+                document.getElementById('submit').disabled=false;
+       }
+
+}
+
 
 //Criação do modal de alerta para o delete!
 $(document).ready(function(){

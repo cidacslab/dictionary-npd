@@ -36,8 +36,8 @@ var values = new Array();
                         "{"+
                             '"variable": "'+String($('#nameVariable').val()+'" ,')+
                             '"type": "'+String($('#type').val() +'" ,') +
-                            '"comment": "'+String($('#comment').val() +'" ,') +
-                            '"description": "'+String($('#description').val() +'" ,') +
+                            '"comment": "'+String($('#comment').val().replace(',', ' ') +'" ,') +
+                            '"description": "'+String($('#description').val().replace(',', ' ') +'" ,') +
                             '"categories_std":  {'+ categories('.originalValue','.standardizeValue') + "}," +
                             '"categories": {'+ categories('.standardizeValue','.nameCategory')  + "}}-" 
                             // console.log(categories('.originalValue','.nameCategory') );

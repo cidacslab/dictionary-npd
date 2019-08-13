@@ -26,8 +26,8 @@
                 {% for variable in variables %}
                 <tr> 
                     <td>{{variable.variable}}</td>
-                    <td>{{variable.description}}</td>
-                    <td> {{variable.type}}</td>
+                    <td class="table-max">{{variable.description}}</td>
+                    <td > {{variable.type}}</td>
                     {% if variable.categories != {  } %}
                     <td>
                         <ul>
@@ -42,8 +42,8 @@
                     {% else %}
                     <td></td>
                     {% endif %}
-                    <td> {{variable.comment}}</td>
-                    <td class="no-print">
+                    <td class="table-max"> {{variable.comment}}</td>
+                    <td class="no-print col s3">
                         <div class="row">
                             <div class="col s6">
                                 <form action="{{ url_for('edit_variable') }}" method="post" class="pull-right">
