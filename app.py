@@ -5,7 +5,6 @@ import sys
 import json
 import pandas as pd
 import re
-import numpy as np
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
