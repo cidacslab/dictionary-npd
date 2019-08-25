@@ -28,3 +28,22 @@ $ yum install mod_wsgi
 ## Packages
 <a href="https://github.com/cidacslab/dictionary-npd/blob/master/requirements.txt">Requirements</a>
 
+## The App
+
+### Home
+
+![alt text](https://github.com/cidacslab/dictionary-npd/blob/master/images/home.png)
+
+###### Initial application form where the variables that compose the dictionary are released.
+- Dictionary's Name
+- Variable's name
+- Type [Byte, Date, Integer, Long, String, Double]
+- Description: Description about the variable
+- Internal Comments: Internal comments that will not be in the dictionary of the researchers.
+- External Comments: External comments that will be in the dictionary of the researchers.
+- Add: add variable to dictionary (save cache)
+- Submit: Create the dictionary and add dictionary variables to the database.
+
+```
+Note: First you must click on add, then click on submit.
+```
