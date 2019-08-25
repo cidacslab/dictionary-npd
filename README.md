@@ -34,7 +34,7 @@ $ yum install mod_wsgi
 
 ![alt text](https://github.com/cidacslab/dictionary-npd/blob/master/images/home.png)
 
-###### Initial application form where the variables that compose the dictionary are released.
+Initial application form where the variables that compose the dictionary are released.
 - Dictionary's Name
 - Variable's name
 - Type [Byte, Date, Integer, Long, String, Double]
@@ -47,3 +47,38 @@ $ yum install mod_wsgi
 ```
 Note: First you must click on add, then click on submit.
 ```
+![alt text](https://github.com/cidacslab/dictionary-npd/blob/master/images/home-byte.png)
+
+The byte type also has the fields:
+- Category's Name
+- Original Value
+- Standardized Value
+
+```
+Note: Does not need to include 0-Nulo and 99-Inconsistência values
+```
+### List of Dictionaries
+
+![alt text](https://github.com/cidacslab/dictionary-npd/blob/master/images/lista_dicionarios.png)
+
+Lists all dictionaries included in the database.
+- Create: Creates a csv file used for the base standardization process.
+- Edit: Opened a list of variables contained in the dictionary for viewing and possible editing.
+- Delete: Deletes the dictionary from the database.
+
+### List of Variables
+
+![alt text](https://github.com/cidacslab/dictionary-npd/blob/master/images/lista-variaveis.png)
+
+Shows a preview of the variables contained in the dictionary.
+
+- Edit: Editing a variable
+- Delete: Deletes a variable from the database.
+- Print Dictionary CSV: Create a dictionary version for the researcher in CSV.
+- Print Dictionary PDF: Create a dictionary version for the researcher in PDF.
+- Add Variable: Adds a new variable in the dictionary.
+
+### Exemple of Dictionary in PDF
+
+![alt text](https://github.com/cidacslab/dictionary-npd/blob/master/images/dicionario_pdf.png)
+
