@@ -28,7 +28,7 @@
     }
     
 .no-print { 
-    display:block; 
+    
 }
 
 ::-webkit-input-placeholder  { 
@@ -72,5 +72,5 @@ li a .text-menu{
 }
 
 .table-max{
-    width: 30% !important;
+    width: 15% !important;
 }

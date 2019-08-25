@@ -8,16 +8,13 @@
                 <form  action="/update"  id="myForm" method="post" ><!--Formulário-->
                     <input type="text" name="id_var" id="id_var" hidden value="{{var._id}}">
                     <div class="row">
-                        <div class="col s3">
+                        <div class="col s5">
                             <input type="text" id="nameDictionary" name="nameDictionary" placeholder="Dictionary's Name" value="{{dict}}" disabled>
                         </div>
-                        <div class="col s3">
+                        <div class="col s5">
                             <input type="text" id="nameVariable" name="nameVariable" placeholder="Variable's Name" value="{{var.variable}}">
                         </div>
-                        <div class="col s3">
-                            <input type="text" id="description" name="description" placeholder="Description" value="{{var.description}}">
-                        </div>
-                        <div class="input-field col s3">
+                        <div class="input-field col s2">
                             <select class="browser-default" id="type" onclick="selected(this.value)">
                                 <script>function desc_type(){document.getElementById("type").value = "{{var.type}}";}</script>
                               <option  disabled>Type</option>
@@ -30,7 +27,13 @@
                             </select>
                         </div>
                         <div class="col s12">
-                            <input type="text" id="comment" name="comment" placeholder="Comments" value="{{var.comment}}">   
+                            <input type="text" id="description" name="description" placeholder="Description" autocomplete>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" id="internalComment" name="internalComment" placeholder="Internal comments">   
+                        </div>
+                        <div class="col s6">
+                            <input type="text" id="externalComment" name="externalComment" placeholder="External comments">   
                         </div>
                         <div class="col s12">
                             <div class="card large my-card" id="boxCategorys" style='display: none'>

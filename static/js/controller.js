@@ -36,14 +36,16 @@ var values = new Array();
                         "{"+
                             '"variable": "'+String($('#nameVariable').val()+'" ,')+
                             '"type": "'+String($('#type').val() +'" ,') +
-                            '"comment": "'+String($('#comment').val().replace(',', ' ') +'" ,') +
+                            '"comment": "'+String($('#internalComment').val().replace(',', ' ') +'" ,') +
+                            '"external_comment": "'+String($('#externalComment').val().replace(',', ' ') +'" ,') +
                             '"description": "'+String($('#description').val().replace(',', ' ') +'" ,') +
                             '"categories_std":  {'+ categories('.originalValue','.standardizeValue') + "}," +
-                            '"categories": {'+ categories('.standardizeValue','.nameCategory')  + "}}-" 
+                            '"categories": {'+ categories('.standardizeValue','.nameCategory')  + "}}--" 
                             // console.log(categories('.originalValue','.nameCategory') );
                     }
             values.push(value)
-            $("#comment").val(""); 
+            $("#internalComment").val("");
+            $("#externalComment").val("");
             $('#nameVariable').val('');
             $('#description').val('');
             $('.originalValue').val('');

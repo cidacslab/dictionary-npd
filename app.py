@@ -8,6 +8,10 @@ import re
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
+# encoding=utf8
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, 'templates/')
 
@@ -55,7 +59,7 @@ def teste():
         if nameDictionary == "None":
                 nameDictionary = str(request.values.get('nameDictionary_add'))
 
-        variables  = variables.replace("'",'"').replace('-,','-').split('-')
+        variables  = variables.replace("'",'"').replace('--,','--').split('--')
         nameDictionary = nameDictionary.replace(" ", "_")
         nameDictionary = re.sub("\W", "", nameDictionary)
         
@@ -65,7 +69,7 @@ def teste():
                                 var = var.replace(",}","}")
                                 var = json.loads(var)
                         except:
-                                return "erro"
+                                return "erro"+var
                         collection = db[nameDictionary]
                         collection.insert(var) 
 
@@ -196,6 +200,9 @@ def send_csv():
            
         return render_template('dictionary.html', dictionarys=dics_submit)      
 
+
+if __name__ == '__main__':
+    app.run(host='192.168.0.13', debug=False)
 
 
 

@@ -1,7 +1,7 @@
 {% extends 'layout/menu.html' %}
 {% block title %}View {{dict}}{% endblock %}
 {% block body %}
-    <div class="container" id="table">
+    <div id="table" style="margin-left: 10px; margin-right: 10px;">
         <div class="row">
             <div class="col s8 right_">
                 <h1>{{dict}}</h1><br class="print"><br class="print"><br class="print">
@@ -18,7 +18,8 @@
                     <th>Description</th>
                     <th>Type</th>
                     <th>Categories</th>
-                    <th>Comments</th>
+                    <th>External Comments</th>
+                    <th class="no-print">Internal Comments</th>
                     <th class="no-print"></th>
                 </tr>
             </thead>
@@ -42,7 +43,8 @@
                     {% else %}
                     <td></td>
                     {% endif %}
-                    <td class="table-max"> {{variable.comment}}</td>
+                    <td class="table-max"> {{variable.external_comment}}</td>
+                    <td class="table-max no-print"> {{variable.comment}}</td>
                     <td class="no-print col s3">
                         <div class="row">
                             <div class="col s6">

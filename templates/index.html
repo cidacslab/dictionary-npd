@@ -24,16 +24,13 @@
             <h1>Dictionary</h1></br>
             <form  action="/teste"  id="myForm" method="post" ><!--Formulário-->
                 <div class="row">
-                    <div class="col s3">
+                    <div class="col s5">
                             <input type="text" id="nameDictionary" name="nameDictionary" placeholder="Dictionary's Name" autocomplete>
                     </div>
-                    <div class="col s3">
+                    <div class="col s5">
                         <input type="text" id="nameVariable" name="nameVariable" placeholder="Variable's Name" autocomplete>
                     </div>
-                    <div class="col s3">
-                        <input type="text" id="description" name="description" placeholder="Description" autocomplete>
-                    </div>
-                    <div class="input-field col s3">
+                    <div class="input-field col s2">
                         <select class="browser-default" id="type" onclick="selected(this.value)" onchange="type_disabled()">
                           <option  disabled selected>Type</option>
                           <option >Byte</option>
@@ -45,7 +42,13 @@
                         </select>
                     </div>
                     <div class="col s12">
-                        <input type="text" id="comment" name="comment" placeholder="Comments">   
+                        <input type="text" id="description" name="description" placeholder="Description" autocomplete>
+                    </div>
+                    <div class="col s6">
+                        <input type="text" id="internalComment" name="internalComment" placeholder="Internal comments">   
+                    </div>
+                    <div class="col s6">
+                        <input type="text" id="externalComment" name="externalComment" placeholder="External comments">   
                     </div>
                     <div class="col s12">
                         <div class="card large my-card" id="boxCategorys" style='display: none'>
