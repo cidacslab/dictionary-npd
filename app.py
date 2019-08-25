@@ -5,6 +5,7 @@ import sys
 import json
 import pandas as pd
 import re
+import numpy as np
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
@@ -109,6 +110,12 @@ def pandas_to_csv():
         df = pd.DataFrame(list(collection.find()))
         
         df = df[['variable','categories_std','type']]
+
+         for cat in range(len(df.count()) + 1):
+                if str(df['categories_std'][cat]) == '{}':
+                        df['categories_std'][cat] =str(df['categories_std'][cat])
+                        df['categories_std'][cat] = None
+
         path_csv = ('/dictionary/'+nameDictionary_csv+'.csv')
         my_file = os.getcwd()
         df.to_csv(my_file+path_csv,index=False, header=False)
@@ -198,11 +205,34 @@ def send_csv():
         for i in dic_submit:
                 dics_submit.append(i)
            
-        return render_template('dictionary.html', dictionarys=dics_submit)      
+        return render_template('dictionary.html', dictionarys=dics_submit)   
 
+@app.route('/to_csv_final', methods=['POST'])
+def to_csv_final():
+
+        nameDictionary_csv = str(request.values.get('id'))
+        
+        collection = db[nameDictionary_csv]
+
+        df = pd.DataFrame(list(collection.find()))
+        
+        df = df[['variable','categories','description','type', 'external_comment']]
+        path_csv = ('/dictionary/'+nameDictionary_csv+'_researcher_version.csv')
+        null = None
+        
+        for cat in range(len(df.count()) + 1):
+                if str(df['categories'][cat]) == '{}':
+                        df['categories'][cat] =str(df['categories'][cat])
+                        df['categories'][cat] = None
+                else:
+                        df['categories'][cat] = str(df['categories'][cat]).replace(':', '-').replace('{', '').replace('}', '').replace("u'", "'").replace(',', '\n')
+        
+        my_file = os.getcwd()
+        df.to_csv(my_file+path_csv,index=False, header=True)
+        return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.13', debug=False)
+    app.run(debug=False)
 
 
 
