@@ -69,6 +69,9 @@ function printJS() {
                     'float: left !important;'+
                     'text-align: left !important;'+
                 '}'+
+                'ul, li{'+
+                    'list-style-type: none;'+
+                '}'+    
             '}'+
         '</style>';
     htmlToPrint += divToPrint.outerHTML;
