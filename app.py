@@ -9,8 +9,8 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 # encoding=utf8
-reload(sys)
-sys.setdefaultencoding('utf8')
+#reload(sys)
+#sys.setdefaultencoding('utf8')
 
 project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, 'templates/')
@@ -108,16 +108,18 @@ def pandas_to_csv():
 
         df = pd.DataFrame(list(collection.find()))
         
-        df = df[['variable','categories_std','type']]
+        df = df[['variable','type', 'categories_std']]
 
-         for cat in range(len(df.count()) + 1):
+        _count = collection.count()
+
+        for cat in range(_count):
                 if str(df['categories_std'][cat]) == '{}':
                         df['categories_std'][cat] =str(df['categories_std'][cat])
                         df['categories_std'][cat] = None
 
         path_csv = ('/dictionary/'+nameDictionary_csv+'.csv')
         my_file = os.getcwd()
-        df.to_csv(my_file+path_csv,index=False, header=False)
+        df.to_csv(my_file+path_csv,index=False, header=False, encoding='ascii')
         return render_template('index.html')
 
 #Abrir tela de edicao de um dicionario, com listagem das variaveis
@@ -214,12 +216,14 @@ def to_csv_final():
         collection = db[nameDictionary_csv]
 
         df = pd.DataFrame(list(collection.find()))
+
+        _count = collection.count()
         
-        df = df[['variable','categories','description','type', 'external_comment']]
+        df = df[['variable','description','type','categories', 'external_comment']]
         path_csv = ('/dictionary/'+nameDictionary_csv+'_researcher_version.csv')
         null = None
         
-        for cat in range(len(df.count()) + 1):
+        for cat in range(_count):
                 if str(df['categories'][cat]) == '{}':
                         df['categories'][cat] =str(df['categories'][cat])
                         df['categories'][cat] = None
@@ -227,7 +231,7 @@ def to_csv_final():
                         df['categories'][cat] = str(df['categories'][cat]).replace(':', '-').replace('{', '').replace('}', '').replace("u'", "'").replace(',', '\n')
         
         my_file = os.getcwd()
-        df.to_csv(my_file+path_csv,index=False, header=True)
+        df.to_csv(my_file+path_csv,index=False, header=True, encoding='utf8')
         return render_template('index.html')
 
 if __name__ == '__main__':
