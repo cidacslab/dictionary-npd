@@ -82,3 +82,7 @@ Shows a preview of the variables contained in the dictionary.
 
 ![alt text](https://github.com/cidacslab/dictionary-npd/blob/master/images/dicionario_pdf.png)
 
+### Exemple the App
+
+![alt text](https://github.com/cidacslab/dictionary-npd/blob/master/images/exemplo.gif)
+
