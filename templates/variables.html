@@ -24,18 +24,18 @@
                 </tr>
             </thead>
             <tbody>
-                {% for variable in variables %}
+                {% for x in range(total_variable) %}
                 <tr> 
-                    <td>{{variable.variable}}</td>
-                    <td class="table-max">{{variable.description}}</td>
-                    <td > {{variable.type}}</td>
-                    {% if variable.categories != {  } %}
+                    <td>{{variables[x].variable}}</td>
+                    <td class="table-max">{{variables[x].description}}</td>
+                    <td > {{variables[x].type}}</td>
+                    {% if cat[x] != {  } %}
                     <td>
                         <ul>
 
                             <li>0 - Nulo</li>
-                            {% for categories in variable.categories %}
-                            <li>{{categories}} - {{variable.categories[categories]}}</li>
+                            {% for categories in cat[x]  %}
+                            <li>{{categories}} - {{cat[x][categories]}}</li>
                             {% endfor %}
                             <li>99 - Inconsistência</li>
                         </ul>
@@ -43,25 +43,25 @@
                     {% else %}
                     <td></td>
                     {% endif %}
-                    <td class="table-max"> {{variable.external_comment}}</td>
-                    <td class="table-max no-print"> {{variable.comment}}</td>
+                    <td class="table-max"> {{variables[x].external_comment}}</td>
+                    <td class="table-max no-print"> {{variables[x].comment}}</td>
                     <td class="no-print col s3">
                         <div class="row">
                             <div class="col s6">
                                 <form action="{{ url_for('edit_variable') }}" method="post" class="pull-right">
-                                    <input type="hidden" name="id" value="{{dict}} {{ variable._id }}">
+                                    <input type="hidden" name="id" value="{{dict}} {{ variables[x]._id }}">
                                     <input type="submit" class="btn"  value="Edit">
                                 </form>
                             </div>
                             <div class="col s6">
-                                <a class="btn red modal-trigger" href="#{{variable._id}}" >Delete</a>
-                                <div id="{{variable._id}}" class="modal bottom-sheet">
+                                <a class="btn red modal-trigger" href="#{{variables[x]._id}}" >Delete</a>
+                                <div id="{{variables[x]._id}}" class="modal bottom-sheet">
                                     <div class="modal-content">
-                                        <h4>Are you sure you want to delete a variable {{variable.variable}}?</h4>
+                                        <h4>Are you sure you want to delete a variable {{variables[x].variable}}?</h4>
                                     </div>
                                     <div class="modal-footer">
                                         <form action="{{ url_for('variable_delete') }}" method="post" class="pull-right">
-                                            <input type="hidden" name="id" value="{{dict}} {{ variable._id }}">
+                                            <input type="hidden" name="id" value="{{dict}} {{ variables[x]._id }}">
                                             <div class="row left">
                                                 <div class="col s6">
                                                     <input type="submit" class="btn red modal-close" value="Yes" style="margin-left: 20px;">

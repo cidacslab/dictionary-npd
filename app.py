@@ -96,7 +96,17 @@ def update():
         db[nameDic_update].update({'_id': ObjectId(id_update)}, {'$set': variable_update }, upsert = True)
                
         db_update_list = list(db[nameDic_update].find())
-        return render_template('variables.html', dict = nameDic_update, variables = db_update_list)
+
+        variable_count = db[nameDic_update].count()
+
+        list_cat = []
+        for cat in db_update_list:
+                d = cat['categories']
+                d = {int(k):str(v) for k,v in d.items()}
+                d = {k: v for k,v  in sorted(d.items(), key=lambda item: item)}
+                list_cat.append(d)
+
+        return render_template('variables.html', dict = nameDic_update, variables = db_update_list, total_variable = variable_count, cat=list_cat)
 
 #Criacao do dicionario em csv para padronizacao
 @app.route('/to_csv', methods=['POST'])
@@ -129,7 +139,16 @@ def edit_dictionary():
         db_edit = db[nameDictionary_edit]
         db_edit_list = list(db_edit.find())
         variable_count = db_edit.count()
-        return render_template('variables.html', dict = nameDictionary_edit, variables = db_edit_list, total_variable = variable_count) 
+
+        list_cat = []
+        for cat in db_edit_list:
+                d = cat['categories']
+                d = {int(k):str(v) for k,v in d.items()}
+                d = {k: v for k,v  in sorted(d.items(), key=lambda item: item)}
+                list_cat.append(d)
+         
+        
+        return render_template('variables.html', dict = nameDictionary_edit, variables = db_edit_list, total_variable = variable_count, cat=list_cat) 
 
 #Fazer uma pesquisa de dicionarios no banco
 @app.route("/search")
