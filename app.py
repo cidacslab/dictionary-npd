@@ -247,7 +247,7 @@ def to_csv_final():
                         df['categories'][cat] =str(df['categories'][cat])
                         df['categories'][cat] = None
                 else:
-                        df['categories'][cat] = str(df['categories'][cat]).replace(':', '-').replace('{', '').replace('}', '').replace("u'", "'").replace(',', '\n')
+                        df['categories'][cat] = str(df['categories'][cat]).replace(':', '-').replace('{', '').replace('}', '').replace("u'", "").replace(',', '\n').replace("'", "").replace('"', '')
         
         my_file = os.getcwd()
         df.to_csv(my_file+path_csv,index=False, header=True, encoding='utf8')
