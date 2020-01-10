@@ -9,8 +9,8 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 # encoding=utf8
-#reload(sys)
-#sys.setdefaultencoding('utf8')
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, 'templates/')
@@ -247,6 +247,8 @@ def to_csv_final():
                         df['categories'][cat] =str(df['categories'][cat])
                         df['categories'][cat] = None
                 else:
+                        df['categories'][cat] = {int(k):str(v) for k,v in df['categories'][cat].items()}
+                        df['categories'][cat] = {k: v for k,v  in sorted(df['categories'][cat].items(), key=lambda item: item)}
                         df['categories'][cat] = str(df['categories'][cat]).replace(':', '-').replace('{', '').replace('}', '').replace("u'", "").replace(',', '\n').replace("'", "").replace('"', '')
         
         my_file = os.getcwd()
