@@ -130,6 +130,7 @@ function selected_state(value){
         var state2 = document.getElementById('category_state2');
         var state3 = document.getElementById('category_state3');
         var state4 = document.getElementById('category_state4');
+        var state5 = document.getElementById('category_state5');
         var normal = document.getElementById('category');
             if(value == "state1"){
                 state1.style.display = 'block';
@@ -143,11 +144,15 @@ function selected_state(value){
             }else if (value == "state4"){
                 state4.style.display = 'block';
                 normal.style.display = "none";
+            }else if (value == "state5"){
+                state5.style.display = 'block';
+                normal.style.display = "none";
             }else{
                 state1.style.display = 'none';
                 state2.style.display = 'none';
                 state3.style.display = 'none';
                 state4.style.display = 'none';
+                state5.style.display = 'none';
                 normal.style.display = "block";
         }
     }

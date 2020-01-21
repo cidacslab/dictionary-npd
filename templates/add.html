@@ -54,7 +54,15 @@
                         <div class="card large my-card" id="boxCategorys" style='display: none'>
                             <div class="card-content my-card">
                                 <span class="card-title">Categorys</span> <!--Categorias para variaveis tipo Byte-->
-                                <div class="row" id="category">
+                                <div class="input-field col s2">
+                                    <select class="browser-default" id="type" onclick="selected(this.value)" onchange="type_disabled()">
+                                      <option  disabled selected>Type Variable</option>
+                                      <option >State</option>
+                                      <option >Sex</option>
+                                    </select>
+                                </div>
+                                {% include 'layout/common_variables.html' %}
+                                <div class="row" id="category" style="display: block;">
                                     <div class="col s5">
                                         <input type="text" class="nameCategory" id="nameCategory" name="nameCategory" placeholder="Category's Name" autocomplete>     
                                     </div>
