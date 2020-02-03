@@ -9,8 +9,10 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 # encoding=utf8
-reload(sys)
-sys.setdefaultencoding('utf8')
+#reload(sys)
+#sys.setdefaultencoding('utf8')
+
+pathSave = "/var/www/html/dictionary-npd/file/"
 
 project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, 'templates/')
@@ -53,11 +55,11 @@ def dictionary():
 #Insercao das variaveis e criacao do dicionario no banco
 @app.route('/teste', methods=['POST', 'GET']) 
 def teste():
-        nameDictionary = str(request.form.get('nameDictionary').encode('utf-8'))
-        variables = str(request.form.get('result')).encode('utf-8')
-
+        nameDictionary = str(request.form.get('nameDictionary'))
+        variables = str(request.form.get('result'))
+        
         if nameDictionary == "None":
-                nameDictionary = str(request.values.get('nameDictionary_add').encode('utf-8'))
+                nameDictionary = str(request.values.get('nameDictionary_add'))
 
         variables  = variables.replace("'",'"').replace('--,','--').split('--')
         nameDictionary = nameDictionary.replace(" ", "_")
@@ -83,9 +85,9 @@ def teste():
 #Update de uma variavel no banco
 @app.route('/update', methods=['POST'] )
 def update():
-        nameDic_update = str(request.form.get('nameDictionary_up').encode('utf-8'))
-        variable_update = str(request.form.get('result').enconde('utf-8'))
-        id_update = str(request.form.get('id_var').encode('utf-8'))
+        nameDic_update = str(request.form.get('nameDictionary_up'))
+        variable_update = str(request.form.get('result'))
+        id_update = str(request.form.get('id_var'))
 
         try:
                 variable_update  = variable_update.replace("'",'"').replace('-', '').replace(",}","}")
@@ -102,7 +104,7 @@ def update():
         list_cat = []
         for cat in db_update_list:
                 d = cat['categories']
-                d = {int(k):str(v.encode('utf-8')) for k,v in d.items()}
+                d = {int(k):str(v) for k,v in d.items()}
                 d = {k: v for k,v  in sorted(d.items(), key=lambda item: item)}
                 list_cat.append(d)
 
@@ -112,7 +114,7 @@ def update():
 @app.route('/to_csv', methods=['POST'])
 def pandas_to_csv():
 
-        nameDictionary_csv = str(request.values.get('id').encode('utf-8'))
+        nameDictionary_csv = str(request.values.get('id'))
         
         collection = db[nameDictionary_csv]
 
@@ -122,20 +124,35 @@ def pandas_to_csv():
 
         _count = collection.count()
 
+        characterMap = {u'\u00E7': 'c', u'\u00C7' : 'C', u'\u011F' : 'g', u'\u011E' : 'G', 
+        u'\u00F6': 'o', u'\u00D6' : 'O', u'\u015F' : 's', u'\u015E' : 'S', u'\u00FC' : 'u', 
+        u'\u00DC' : 'U' , u'\u0131' : 'i', u'\u0049' : 'I', u'\u0259' : 'e', u'\u018F' : 'E'}
+
+        def ascii_pd (df, lista):
+                for i in lista:
+                        df[i] = (df[i].astype("str")
+                                .str.rstrip()
+                                .replace(characterMap, regex=True)
+                                .str.normalize('NFKD')
+                                .str.encode('ascii', errors='ignore')
+                                .str.decode('utf-8'))
+
+        ascii_pd(df, ['variable','type', 'categories_std'])
+
         for cat in range(_count):
-                if str(df['categories_std'][cat].encode('utf-8')) == '{}':
-                        df['categories_std'][cat] =str(df['categories_std'][cat].encode('utf-8'))
+                if str(df['categories_std'][cat]) == '{}':
+                        df['categories_std'][cat] =str(df['categories_std'][cat])
                         df['categories_std'][cat] = None
 
-        path_csv = ('/dictionary/'+nameDictionary_csv+'.csv')
-        my_file = os.getcwd()
-        df.to_csv(my_file+path_csv,index=False, header=False, encoding='ascii')
+        path_csv = (pathSave+nameDictionary_csv+'.csv')
+        #my_file = os.getcwd()
+        df.to_csv(path_csv,index=False, header=False, encoding='ascii')
         return render_template('index.html')
 
 #Abrir tela de edicao de um dicionario, com listagem das variaveis
 @app.route("/edit_dictionary", methods=['GET', 'POST'])
 def edit_dictionary():
-        nameDictionary_edit = str(request.values.get('id').encode('utf-8'))
+        nameDictionary_edit = str(request.values.get('id'))
         db_edit = db[nameDictionary_edit]
         db_edit_list = list(db_edit.find())
         variable_count = db_edit.count()
@@ -143,7 +160,7 @@ def edit_dictionary():
         list_cat = []
         for cat in db_edit_list:
                 d = cat['categories']
-                d = {int(k):str(v.encode('utf-8')) for k,v in d.items()}
+                d = {int(k):str(v) for k,v in d.items()}
                 d = {k: v for k,v  in sorted(d.items(), key=lambda item: item)}
                 list_cat.append(d)
          
@@ -153,7 +170,7 @@ def edit_dictionary():
 #Fazer uma pesquisa de dicionarios no banco
 @app.route("/search")
 def search():
-        nameDictionary_search = str(request.args.get('dictionary').encode('utf-8'))
+        nameDictionary_search = str(request.args.get('dictionary'))
         analise = re.compile(nameDictionary_search)
         collection = db.collection_names(include_system_collections=False)
         search_dic = []
@@ -166,7 +183,7 @@ def search():
 #Deletar completamente o dicionario no banco
 @app.route('/dictionary_delete', methods=['GET', 'POST'])
 def dictionary_delete():
-        nameDictionary_delete = str(request.values.get('id').encode('utf-8'))
+        nameDictionary_delete = str(request.values.get('id'))
         collection = db[nameDictionary_delete]
         collection.drop()
 
@@ -179,7 +196,7 @@ def dictionary_delete():
 #Deletar uma variavel na colecao
 @app.route('/variable_delete', methods=['GET', 'POST'])
 def variable_delete():
-        name_variable_delete = str(request.values.get('id').encode('utf-8')).split()
+        name_variable_delete = str(request.values.get('id')).split()
         col_var_del = db[name_variable_delete[0]].remove( { '_id': (ObjectId(name_variable_delete[1])) }, 1)
 
         db_edit_del = db[name_variable_delete[0]]
@@ -189,21 +206,21 @@ def variable_delete():
 #Acessar pagina para edicao de variavel
 @app.route('/edit_variable', methods=['GET', 'POST'])
 def edit_variable():
-        name_variable_edit = str(request.values.get('id').encode('utf-8')).split()
+        name_variable_edit = str(request.values.get('id')).split()
         col_var_edit =  list(db[name_variable_edit[0]].find({'_id': ObjectId((name_variable_edit[1])) }))
         return render_template('edit.html', dict = name_variable_edit[0], vars = col_var_edit)
 
 #Acessar pagina para adicionar novas variaveis
 @app.route('/add_variable', methods=['GET', 'POST'])
 def add_variable():
-        name_dic_add = str(request.values.get('id').encode('utf-8'))
+        name_dic_add = str(request.values.get('id'))
         return render_template('add.html', dict=name_dic_add)
 
 #Incluir dicionario atraves de arquivo csv
 @app.route('/send_csv', methods=['GET', 'POST'])
 def send_csv():
-        nameDictionary = str(request.form.get('nameDictionary').encode('utf-8'))
-        csv = str(request.values.get('file_csv').encode('utf-8'))
+        nameDictionary = str(request.form.get('nameDictionary'))
+        csv = str(request.values.get('file_csv'))
         
 
         nameDictionary = nameDictionary.replace(" ", "_")
@@ -230,7 +247,7 @@ def send_csv():
 @app.route('/to_csv_final', methods=['POST'])
 def to_csv_final():
 
-        nameDictionary_csv = str(request.values.get('id').encode('utf-8'))
+        nameDictionary_csv = str(request.values.get('id'))
         
         collection = db[nameDictionary_csv]
 
@@ -239,7 +256,7 @@ def to_csv_final():
         _count = collection.count()
         
         df = df[['variable','description','type','categories', 'external_comment']]
-        path_csv = ('/dictionary/'+nameDictionary_csv+'_researcher_version.csv')
+        path_csv = (pathSave+nameDictionary_csv+'_researcher_version.csv')
         null = None
         
         for cat in range(_count):
@@ -250,9 +267,10 @@ def to_csv_final():
                         df['categories'][cat] = {int(k):str(v) for k,v in df['categories'][cat].items()}
                         df['categories'][cat] = {k: v for k,v  in sorted(df['categories'][cat].items(), key=lambda item: item)}
                         df['categories'][cat] = str(df['categories'][cat]).replace(':', '-').replace('{', '').replace('}', '').replace("u'", "").replace(',', '\n').replace("'", "").replace('"', '')
-        
-        my_file = os.getcwd()
-        df.to_csv(my_file+path_csv,index=False, header=True, encoding='utf8')
+                        df['categories'][cat] = "0- Nulo \n"+str(df['categories'][cat])+"\n 99-Inconsistência"
+
+        #my_file = os.getcwd()
+        df.to_csv(path_csv,index=False, header=True, encoding='utf8')
         return render_template('index.html')
 
 if __name__ == '__main__':

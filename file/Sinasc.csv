@@ -1,0 +1,7 @@
+nome,String,
+idade,Integer,
+sexo,Byte,"{'M': '1', 'F': '2'}"
+dtnasc,Date,
+xxx,Integer,
+teste final,Long,
+teste,Byte,"{'1': '10', '2': '1'}"

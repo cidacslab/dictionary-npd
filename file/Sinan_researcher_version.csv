@@ -1,0 +1,49 @@
+variable,description,type,categories,external_comment
+nome,nome do paciente,String,,
+dtnasc,data de nascimento,Date,,
+teste,nãoo,Date,,
+state,variavel de estado,Byte,"0- Nulo 
+11- Rondônia
+ 12- Acre
+ 13- Amazonas
+ 14- Roraima
+ 15- Pará
+ 16- Amapá
+ 17- Tocantins
+ 21- Maranhão
+ 22- Piauí
+ 23- Ceará
+ 24- Rio Grande do Norte
+ 25- Paraíba
+ 26- Pernambuco
+ 27- Alagoas
+ 28- Sergipe
+ 29- Bahia
+ 31- Minas Gerais
+ 32- Espírito Santo
+ 33- Rio de Janeiro
+ 35- São Paulo
+ 41- Paraná
+ 42- Santa Catarina
+ 43- Rio Grande do Sul
+ 50- Mato Grosso do Sul
+ 51- Mato Grosso
+ 52- Goiás
+ 53- Distrito Federal
+ 99-Inconsistência",
+idade,idade do paciente,Integer,,
+sexo,sexo do paciente,Byte,"0- Nulo 
+1- Masculino
+ 2- Feminino
+ 99-Inconsistência",
+test,teste de ordem das categorias,Byte,"0- Nulo 
+1- teste1
+ 2- teste2
+ 3- teste3
+ 10- teste4
+ 99-Inconsistência",
+test2,teste de ordem das categoria versão 2,Byte,"0- Nulo 
+10- teste1
+ 15- teste3
+ 20- teste2
+ 99-Inconsistência",
