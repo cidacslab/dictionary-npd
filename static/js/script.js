@@ -93,10 +93,10 @@ function type_disabled(){
         var name = document.getElementById('nameVariable');
         if(tipo == 'Type' || name == null || name == ""){
                 if(!document.getElementById('add').disabled) document.getElementById('add').disabled=true;
-                if(!document.getElementById('compile').disabled) document.getElementById('compile').disabled=true;
+                //if(!document.getElementById('compile').disabled) document.getElementById('compile').disabled=true;
         }else{
                 if(document.getElementById('add').disabled) document.getElementById('add').disabled=false;
-                if(document.getElementById('compile').disabled) document.getElementById('compile').disabled=false;
+                //if(document.getElementById('compile').disabled) document.getElementById('compile').disabled=false;
         }
 }
 

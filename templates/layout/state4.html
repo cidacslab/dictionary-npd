@@ -432,25 +432,4 @@
     <div class="col s2">
         <a class="btn-floating btn-large waves-effect waves-light red" id="add-category" onclick="AddCampos()"><img src="static/img/icons8-soma-40.png" class="btn-add"></a>
     </div> 
-
-    <script> //Loop para mostrar mais campos de categorias.
-        for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
-            document.write("<span id='linha"+iLoop+"' style='display:none'> <div class='col s5'> <input type='text' class='nameCategory' id='nameCategory"+iLoop+"' name='nameCategory"+iLoop+"' placeholder='Category's Name'>" +    
-            "</div>"+
-            "<div class='col s2'>"+
-                "<input type='text' class='originalValue' id='originalValue" +iLoop+"' name='originalValue'"+iLoop+" placeholder='Original Value'>"+
-            "</div>"+
-            "<div class='col s1'>"+
-                "<img src='static/img/icons8-chevron-right-64.png'>"+
-            "</div>"+
-            "<div class='col s2'>"+
-                "<input type='text' class='standardizeValue' id='standardizeValue"+iLoop+"' name='standardizeValue"+iLoop+"' placeholder='Standardized Value'>"+
-            "</div>"+
-            "<div class='col s2'>"+
-                "<a class='btn-floating btn-large waves-effect waves-light white' id='remove-category' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'><img src='static/img/icons8-excluir-50.png' class='btn-add'></a>"+    
-            "</div> </span>");
-    }
-    </script>
-    <input type="hidden" name="hidden1" id="hidden1">
-    <input type="hidden" name="hidden2" id="hidden2">
 </div>
