@@ -12,7 +12,7 @@ from bson.objectid import ObjectId
 #reload(sys)
 #sys.setdefaultencoding('utf8')
 
-pathSave = "/var/www/html/dictionary-npd/file/"
+pathSave = "/home/juan.santos@cidacs.local/Documentos/dictionary-npd/file/"
 
 project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, 'templates/')
@@ -56,7 +56,7 @@ def dictionary():
 @app.route('/teste', methods=['POST', 'GET']) 
 def teste():
         nameDictionary = str(request.form.get('nameDictionary'))
-        variables = str(request.form.get('result'))
+        variables = (request.form.get('result')).encode('utf-8')
         
         if nameDictionary == "None":
                 nameDictionary = str(request.values.get('nameDictionary_add'))
@@ -104,7 +104,7 @@ def update():
         list_cat = []
         for cat in db_update_list:
                 d = cat['categories']
-                d = {int(k):str(v) for k,v in d.items()}
+                d = {int(k):v for k,v in d.items()}
                 d = {k: v for k,v  in sorted(d.items(), key=lambda item: item)}
                 list_cat.append(d)
 
@@ -160,7 +160,7 @@ def edit_dictionary():
         list_cat = []
         for cat in db_edit_list:
                 d = cat['categories']
-                d = {int(k):str(v) for k,v in d.items()}
+                d = {int(k):v for k,v in d.items()}
                 d = {k: v for k,v  in sorted(d.items(), key=lambda item: item)}
                 list_cat.append(d)
          
@@ -201,7 +201,16 @@ def variable_delete():
 
         db_edit_del = db[name_variable_delete[0]]
         db_edit_list_del = list(db_edit_del.find())
-        return render_template('variables.html', dict = name_variable_delete[0], variables = db_edit_list_del)
+
+        variable_count = db_edit_del.count()
+
+        list_cat = []
+        for cat in db_edit_list_del:
+                d = cat['categories']
+                d = {int(k):v for k,v in d.items()}
+                d = {k: v for k,v  in sorted(d.items(), key=lambda item: item)}
+                list_cat.append(d)
+        return render_template('variables.html', dict = name_variable_delete[0], variables = db_edit_list_del, total_variable = variable_count, cat=list_cat)
 
 #Acessar pagina para edicao de variavel
 @app.route('/edit_variable', methods=['GET', 'POST'])
@@ -258,17 +267,33 @@ def to_csv_final():
         df = df[['variable','description','type','categories', 'external_comment']]
         path_csv = (pathSave+nameDictionary_csv+'_researcher_version.csv')
         null = None
+
+        characterMap = {u'\u00E7': 'c', u'\u00C7' : 'C', u'\u011F' : 'g', u'\u011E' : 'G', 
+        u'\u00F6': 'o', u'\u00D6' : 'O', u'\u015F' : 's', u'\u015E' : 'S', u'\u00FC' : 'u', 
+        u'\u00DC' : 'U' , u'\u0131' : 'i', u'\u0049' : 'I', u'\u0259' : 'e', u'\u018F' : 'E',
+        u'\u00EA': 'e', u'\u00CA': 'E'}
+
+        def utf8_pd (df, lista):
+                for i in lista:
+                        df[i] = (df[i].astype("str")
+                                .str.rstrip()
+                                .replace(characterMap, regex=True)
+                                .str.normalize('NFKC')
+                                .str.encode('utf-8', errors='ignore')
+                                .str.decode('utf-8'))
+        
         
         for cat in range(_count):
                 if str(df['categories'][cat]) == '{}':
                         df['categories'][cat] =str(df['categories'][cat])
                         df['categories'][cat] = None
                 else:
-                        df['categories'][cat] = {int(k):str(v) for k,v in df['categories'][cat].items()}
+                        df['categories'][cat] = {int(k):v for k,v in df['categories'][cat].items()}
                         df['categories'][cat] = {k: v for k,v  in sorted(df['categories'][cat].items(), key=lambda item: item)}
                         df['categories'][cat] = str(df['categories'][cat]).replace(':', '-').replace('{', '').replace('}', '').replace("u'", "").replace(',', '\n').replace("'", "").replace('"', '')
-                        df['categories'][cat] = "0- Nulo \n"+str(df['categories'][cat])+"\n 99-Inconsistência"
+                        df['categories'][cat] = "0- Nulo \n"+ df['categories'][cat] +"\n 99-Inconsistencia"
 
+        utf8_pd(df, ['categories'])
         #my_file = os.getcwd()
         df.to_csv(path_csv,index=False, header=True, encoding='utf8')
         return render_template('index.html')
