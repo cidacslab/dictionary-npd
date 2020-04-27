@@ -92,6 +92,10 @@
             <input type="hidden" name="id" value="{{dict}}">
             <input type="submit" class="btn right no-print green" value="Print Dictionary CSV" style="margin-top: 20px !important; margin-left: 10px; margin-bottom: 20px !important; margin-right: 10px;">
         </form>
+        <form action="{{ url_for('pandas_to_csv') }}" method="post" style="margin-right: 25px;">
+            <input type="hidden" name="id" value="{{ dict }}">
+            <input type="submit" class="btn indigo darken-4 right no-print"  value="Create Standardization" onclick="alert('Created CSV dictionary successfully!')" style="margin-top: 20px;">
+        </form>
     </div>
     <script type="text/javascript" src="static/js/print.js"></script>
     <script type="text/javascript" src="static/lib/js/materialize.min.js"></script>

@@ -34,19 +34,15 @@
                         <td>{{ dictionary }}</td>
                         <td>
                             <div class="row">
-                                <div class="col s6">
-                                    <form action="{{ url_for('pandas_to_csv') }}" method="post" class="pull-right" style="margin-right: 25px;">
-                                        <input type="hidden" name="id" value="{{ dictionary }}">
-                                        <input type="submit" class="btn green"  value="Create Standardization" onclick="alert('Created CSV dictionary successfully!')">
-                                    </form>
+                                <div class="col s4">
                                 </div>
-                                <div class="col s3">
+                                <div class="col s4">
                                     <form action="{{ url_for('edit_dictionary') }}" method="post" class="pull-right"  style="margin-left: 25px;">
                                         <input type="hidden" name="id" value="{{ dictionary }}">
                                         <input type="submit" class="btn"  value="Edit">
                                     </form>
                                 </div>
-                                <div class="col s3">
+                                <div class="col s4">
                                     <a class="btn red modal-trigger" href="#{{dictionary}}" >Delete</a>
                                     <div id="{{dictionary}}" class="modal bottom-sheet">
                                         <div class="modal-content">
