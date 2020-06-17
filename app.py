@@ -7,24 +7,31 @@ import pandas as pd
 import re
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from conf.settings import BASE_PATH
 
-# encoding=utf8
+
+#Python 2.7
+#encoding=utf8
 #reload(sys)
 #sys.setdefaultencoding('utf8')
 
-pathSave = "/home/juan.santos@cidacs.local/Documentos/dictionary-npd/file/"
+pathSave = BASE_PATH
 
 project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, 'templates/')
 
 app = Flask(__name__, template_folder=template_path)
+
+#Python 2.7
 # app.config['MONGO_DBNAME'] = 'dictionaryDB'
 # app.config["MONGO_URI"] = "mongodb://localhost:27017/dictionaryDB"
 
 # mongo = PyMongo(app)
 
-client = MongoClient('mongodb://localhost:27017/')
-db = client.dictionaryDB
+
+#Python 3
+#client = MongoClient('mongodb://localhost:27017/')
+#db = client.dictionaryDB
 def pymongo_python_sys():
         if sys.version_info.major == 2:
                 app.config['MONGO_DBNAME'] = 'dictionaryDB'
@@ -35,7 +42,7 @@ def pymongo_python_sys():
                 mongo = client.dictionaryDB
         return mongo
 
-# mongo = pymongo_python_sys()
+db = pymongo_python_sys()
 #ObjectId = require('mongodb').ObjectID
 
 
@@ -56,14 +63,14 @@ def dictionary():
 @app.route('/teste', methods=['POST', 'GET']) 
 def teste():
         nameDictionary = str(request.form.get('nameDictionary'))
-        variables = (request.form.get('result')).encode('utf-8')
+        variables = str(request.form.get('result'))
         
         if nameDictionary == "None":
                 nameDictionary = str(request.values.get('nameDictionary_add'))
 
         variables  = variables.replace("'",'"').replace('--,','--').split('--')
         nameDictionary = nameDictionary.replace(" ", "_")
-        nameDictionary = re.sub("\W", "", nameDictionary)
+        nameDictionary = re.sub("\W", "", nameDictionary)       
         
         for var in variables:
                 if var is not '':
