@@ -32,17 +32,29 @@ var values = new Array();
                         document.getElementById("nameVariable").focus();
                         return false
                     }else{
-                        var value = 
-                        "{"+
-                            '"variable": "'+String($('#nameVariable').val()+'" ,')+
-                            '"type": "'+String($('#type').val() +'" ,') +
-                            '"comment": "'+String($('#internalComment').val().replace(',', ' ') +'" ,') +
-                            '"external_comment": "'+String($('#externalComment').val().replace(',', ' ') +'" ,') +
-                            '"description": "'+String($('#description').val().replace(',', ' ') +'" ,') +
-                            '"categories_std":  {'+ categories('.originalValue','.standardizeValue') + "}," +
-                            '"categories": {'+ categories('.standardizeValue','.nameCategory')  + "}}--" 
-                            // console.log(categories('.originalValue','.nameCategory') );
-                    }
+                        var normal = document.getElementById('category');
+                        if (normal.style.display == "none"){
+                            var value = 
+                            "{"+
+                                '"variable": "'+String($('#nameVariable').val()+'" ,').toLowerCase()+
+                                '"type": "'+String($('#type').val() +'" ,') +
+                                '"comment": "'+String($('#internalComment').val().replace(',', ' ') +'" ,') +
+                                '"external_comment": "'+String($('#externalComment').val().replace(',', ' ') +'" ,') +
+                                '"description": "'+String($('#description').val().replace(',', ' ') +'" ,') +
+                                '"categories_std":  {'+ categories('.originalValue','.standardizeValue') + "}," +
+                                '"categories": {'+ categories('.standardizeValue','.nameCategory')  + "}}--" 
+                        }else{
+                            var value = 
+                            "{"+
+                                '"variable": "'+String($('#nameVariable').val()+'" ,').toLowerCase()+
+                                '"type": "'+String($('#type').val() +'" ,') +
+                                '"comment": "'+String($('#internalComment').val().replace(',', ' ') +'" ,') +
+                                '"external_comment": "'+String($('#externalComment').val().replace(',', ' ') +'" ,') +
+                                '"description": "'+String($('#description').val().replace(',', ' ') +'" ,') +
+                                '"categories_std":  {'+ categories('.originalValueOthers','.standardizeValueOthers') + "}," +
+                                '"categories": {'+ categories('.standardizeValueOthers','.nameCategoryOthers')  + "}}--"
+                            }
+                        }    
             values.push(value)
             $("#internalComment").val("");
             $("#externalComment").val("");
