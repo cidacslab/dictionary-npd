@@ -28,6 +28,12 @@ $ yum install mod_wsgi
 ## Packages
 <a href="https://github.com/cidacslab/dictionary-npd/blob/master/requirements.txt">Requirements</a>
 
+Run 
+```
+$ pip install -r requirements.txt (Python 2)
+$ pip3 install -r requirements.txt (Python 3)
+```
+
 ## The App
 
 ### Home
