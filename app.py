@@ -194,15 +194,19 @@ def edit_dictionary():
         db_edit = db[nameDictionary_edit]
         db_edit_list = list(db_edit.find())
         variable_count = db_edit.count()
+
         list_cat = []
-        
         for cat in db_edit_list:
-                d = cat['categories']
-                d = {int(k):v for k,v in d.items()}
-                d = {k: v for k,v  in sorted(d.items(), key=lambda item: item)}
-                list_cat.append(d)
-         
-        return render_template('variables.html', dict = nameDictionary_edit, variables = db_edit_list, total_variable = variable_count, cat=list_cat) 
+                try:
+                        d = cat['categories']
+                        d = {int(k):v for k,v in d.items()}
+                        d = {k: v for k,v  in sorted(d.items(), key=lambda item: item)}
+                        list_cat.append(d)
+                except:
+                        d = {''}
+                        list_cat.append(d)
+
+        return render_template('variables.html', dict = nameDictionary_edit, variables = db_edit_list, total_variable = variable_count, cat=list_cat)
 
 #Fazer uma pesquisa de dicionarios no banco
 @app.route("/search")
@@ -335,17 +339,23 @@ def to_csv_final():
             template: index.html
         """
         nameDictionary_csv = str(request.values.get('id'))
+
         collection = db[nameDictionary_csv]
+
         df = pd.DataFrame(list(collection.find()))
+
         _count = collection.count()
+
         df = df[['variable','description','type','categories', 'external_comment']]
         path_csv = (pathSave+nameDictionary_csv+'_researcher_version.csv')
         null = None
 
-        characterMap = {u'\u00E7': 'c', u'\u00C7' : 'C', u'\u011F' : 'g', u'\u011E' : 'G', 
-        u'\u00F6': 'o', u'\u00D6' : 'O', u'\u015F' : 's', u'\u015E' : 'S', u'\u00FC' : 'u', 
-        u'\u00DC' : 'U' , u'\u0131' : 'i', u'\u0049' : 'I', u'\u0259' : 'e', u'\u018F' : 'E',
-        u'\u00EA': 'e', u'\u00CA': 'E'}
+
+        characterMap = {u'\u00E7': 'c', u'\u00C7' : 'C', u'\u011F' : 'g', u'\u011E' : 'G',
+        u'\u00F6': 'o', u'\u00D6' : 'O', u'\u015F' : 's', u'\u015E' : 'S', u'\u00FC' : 'u',
+        u'\u00DC' : 'U' , u'\u0131' : 'i', u'\u0049' : 'I', u'\u0259' : 'e', u'\u018F' : 'E', u'\u007E': '~',
+        u'\u0021' : '!', u'\u0022' : '"', u'\u002D' : '-', u'\u00C0' : 'A', u'\u00E3' : 'a', u'\u00E7' : 'c',
+        u'\u00E9' : 'e', u'\u00AA':'a', u'\u0040':'a', u'\u00B0':'o', u'\u00BA':'0', u'\u00EA':'e', u'\u00CA':'E'}
 
         def utf8_pd (df, lista):
                 for i in lista:
@@ -356,20 +366,28 @@ def to_csv_final():
                                 .str.encode('utf-8', errors='ignore')
                                 .str.decode('utf-8'))
 
+
         for cat in range(_count):
                 if str(df['categories'][cat]) == '{}':
                         df['categories'][cat] =str(df['categories'][cat])
                         df['categories'][cat] = None
                 else:
-                        df['categories'][cat] = {int(k):v for k,v in df['categories'][cat].items()}
-                        df['categories'][cat] = {k: v for k,v  in sorted(df['categories'][cat].items(), key=lambda item: item)}
-                        df['categories'][cat] = str(df['categories'][cat]).replace(':', '-').replace('{', '').replace('}', '').replace("u'", "").replace(',', '\n').replace("'", "").replace('"', '')
-                        df['categories'][cat] = "0- Nulo \n"+ df['categories'][cat] +"\n 99-Inconsistencia"
+                        try:
+                                df['categories'][cat] = {int(k):v for k,v in df['categories'][cat].items()}
+                                df['categories'][cat] = {int(k): v for k,v  in sorted(df['categories'][cat].items(), key=lambda item: item)}
+                                df['categories'][cat] = str(df['categories'][cat]).replace(':', '-').replace('{', '').replace('}', '').replace("u'", "").replace(',', '\n').replace("'", "").replace('"', '')
+                                df['categories'][cat] = "0- Nulo \n"+df['categories'][cat]+"\n 99-Inconsistencia"
+                        except:
+                                df['categories'][cat] = str(df['categories'][cat]).replace(':', '-').replace('{', '').replace('}', '').replace("u'", "").replace(',', '\n').replace("'", "").replace('"', '')
+				df['categories'][cat] = "0- Nulo \n"+df['categories'][cat]+"\n 99-Inconsistencia"
+
 
         utf8_pd(df, ['categories'])
+        
         df.to_csv(path_csv,index=False, header=True, encoding='utf8')
         
         return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=False)
